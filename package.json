@@ -1,0 +1,24 @@
+{
+    "author": {
+        "name": "Sergey Nikitin",
+        "email": "nik.pasaran@gmail.com",
+        "url": "https://github.com/pasaran"
+    },
+    "name": "nommon",
+    "description": "nop's common",
+    "version": "0.0.0",
+    "homepage": "https://github.com/pasaran/nommon",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/pasaran/nommon.git"
+    },
+    "engines": {
+        "node": "*"
+    },
+    "main": "no",
+    "files": [
+        "lib",
+        "no.js"
+    ]
+}
+
