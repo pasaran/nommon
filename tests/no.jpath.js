@@ -286,6 +286,14 @@ describe('priorities of operations', function() {
         no.jpath('.x + .y * .z', data).should.be.eql(25);
     });
 
+    it('9 - 2 - 3', function() {
+        no.jpath('9 - 2 - 3', data).should.be.eql(4);
+    });
+
+    it('20 / 4 / 5', function() {
+        no.jpath('20 / 4 / 5', data).should.be.eql(1);
+    });
+
     it('.x * .y + .z', function() {
         no.jpath('.x * .y + .z', data).should.be.eql(31);
     });
