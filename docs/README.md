@@ -1,5 +1,5 @@
 Documentation
 =============
 
-  * [[no.jpath.md]]
+  * (no.jpath.md)[jpath]
 
