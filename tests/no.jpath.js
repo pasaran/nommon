@@ -308,5 +308,58 @@ describe('priorities of operations', function() {
 
 });
 
+describe('falsy jpaths', function() {
+
+    var data = {
+        foo: {
+            a: true,
+            b: 'hello',
+            c: 42,
+            d: '',
+            e: 0,
+            f: null,
+            g: false,
+            h: undefined
+        }
+    };
+
+    it('true', function() {
+        no.jpath('.foo[ .a ].c', data).should.be.eql( [ 42 ] );
+    });
+
+    it('non-empty string', function() {
+        no.jpath('.foo[ .b ].c', data).should.be.eql( [ 42 ] );
+    });
+
+    it('non-zero number', function() {
+        no.jpath('.foo[ .c ].c', data).should.be.eql( [ 42 ] );
+    });
+
+    it('empty string', function() {
+        no.jpath('.foo[ .d ].c', data).should.be.eql( [] );
+    });
+
+    it('zero', function() {
+        no.jpath('.foo[ .e ].c', data).should.be.eql( [] );
+    });
+
+    it('null', function() {
+        no.jpath('.foo[ .f ].c', data).should.be.eql( [] );
+    });
+
+    it('false', function() {
+        no.jpath('.foo[ .g ].c', data).should.be.eql( [] );
+    });
+
+    it('undefined', function() {
+        no.jpath('.foo[ .h ].c', data).should.be.eql( [] );
+    });
+
+    it('non-existence key', function() {
+        no.jpath('.foo[ .z ].c', data).should.be.eql( [] );
+    });
+
+});
+
 //  ---------------------------------------------------------------------------------------------------------------  //
 
