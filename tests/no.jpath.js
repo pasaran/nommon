@@ -270,8 +270,8 @@ describe('arithmetic operations', function() {
         no.jpath('.count % 17', data).should.be.equal(8);
     });
 
-    it('(.x + .y) * (.z + .t)', function() {
-        no.jpath('(.x + .y) * (.z + .t)', data).should.be.eql(143);
+    it('( .x + .y ) * ( .z + .t )', function() {
+        no.jpath('( .x + .y ) * ( .z + .t )', data).should.be.eql(143);
     });
 
 });
