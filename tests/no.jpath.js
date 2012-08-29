@@ -74,6 +74,26 @@ describe('jpath with predicate', function() {
 
 });
 
+describe('root or self with predicate', function() {
+
+    it('.[ .count > 0 ].count', function() {
+        no.jpath('.[ .count > 0 ].count', data).should.be.eql( [ 42 ] );
+    });
+
+    it('.[ .count < 0 ].count', function() {
+        no.jpath('.[ .count < 0 ].count', data).should.be.eql( [] );
+    });
+
+    it('/[ .count > 0 ].count', function() {
+        no.jpath('/[ .count > 0 ].count', data).should.be.eql( [ 42 ] );
+    });
+
+    it('/[ .count < 0 ].count', function() {
+        no.jpath('/[ .count < 0 ].count', data).should.be.eql( [] );
+    });
+
+});
+
 //  ---------------------------------------------------------------------------------------------------------------  //
 
 describe('jpath with index', function() {
