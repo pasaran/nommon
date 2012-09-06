@@ -114,6 +114,17 @@ describe('jpath with index', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
+describe('jpath with variables', function() {
+
+    it('config.foo.bar', function() {
+        no.jpath('config.foo.bar', {}, { config: { foo: { bar: 42 } } }).should.be.eql( [ 42 ] );
+    });
+
+
+});
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
 describe('jpath with guard', function() {
 
     it('.item[ .selected ][ /.id == "two" ].id', function() {
