@@ -394,3 +394,38 @@ describe('falsy jpaths', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
+describe('string interpolation', function() {
+
+    var data = {
+        foo: {
+            bar: 'hello'
+        },
+        a: 'he',
+        b: 'll',
+        c: 'o'
+    };
+
+    it('"{ .a }{ .b }"', function() {
+        no.jpath('"{ .a }{ .b }{ .c }"', data).should.be.eql('hello');
+    });
+
+    it('.foo.bar[ . == "hello" ]', function() {
+        no.jpath('.foo.bar[ . == "hello" ]', data).should.be.eql([ 'hello' ]);
+    });
+
+    it('.foo.bar[ . == "{ /.a }llo" ]', function() {
+        no.jpath('.foo.bar[ . == "{ /.a }llo" ]', data).should.be.eql([ 'hello' ]);
+    });
+
+    it('.foo.bar[ . == "{ /.a }ll{ /.c }" ]', function() {
+        no.jpath('.foo.bar[ . == "{ /.a }ll{ /.c }" ]', data).should.be.eql([ 'hello' ]);
+    });
+
+    it('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', function() {
+        no.jpath('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', data).should.be.eql([ 'hello' ]);
+    });
+
+});
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
