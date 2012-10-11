@@ -1,4 +1,4 @@
-test:
+tests:
 	mocha tests/no.jpath.js
 
 build:
@@ -7,5 +7,5 @@ build:
 clean:
 	rm lib/no.*.min.js
 
-.PHONY: test
+.PHONY: tests
 
