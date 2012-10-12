@@ -425,6 +425,10 @@ describe('string interpolation', function() {
         no.jpath('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', data).should.be.eql([ 'hello' ]);
     });
 
+    it('"{ .foo }"', function() {
+        no.jpath('"{ .foo }"', data).should.be.eql('');
+    });
+
 });
 
 //  ---------------------------------------------------------------------------------------------------------------  //
