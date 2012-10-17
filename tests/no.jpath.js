@@ -339,6 +339,8 @@ describe('priorities of operations', function() {
 
 });
 
+//  ---------------------------------------------------------------------------------------------------------------  //
+
 describe('falsy jpaths', function() {
 
     var data = {
@@ -427,6 +429,55 @@ describe('string interpolation', function() {
 
     it('"{ .foo }"', function() {
         no.jpath('"{ .foo }"', data).should.be.eql('');
+    });
+
+});
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
+describe('jresult', function() {
+
+    var data = {
+        item: [
+            { id: 'one', count: 24 },
+            { id: 'two', count: 13, selected: true },
+            { id: 'three', count: 17 },
+            { id: 'four', count: 59, selected: true },
+            { id: 'five', count: 42 }
+        ],
+
+        foo: {
+            bar: {
+                first: 1,
+                second: 2,
+                third: 3
+            }
+        }
+    };
+
+    it('jresult #1', function() {
+        no.jpath({
+            selected: '.item[ .selected ]'
+        }, data).should.be.eql({
+            selected: [
+                { id: 'two', count: 13, selected: true },
+                { id: 'four', count: 59, selected: true }
+            ]
+        });
+    });
+
+    it('jresult #2', function() {
+        no.jpath({
+            foo: '.foo.bar',
+            ids: '.item.id'
+        }, data).should.be.eql({
+            foo: {
+                first: 1,
+                second: 2,
+                third: 3
+            },
+            ids: [ 'one', 'two', 'three', 'four', 'five' ]
+        });
     });
 
 });
