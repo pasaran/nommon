@@ -1,6 +1,6 @@
 var no = require('../no.js');
 
-require('should');
+var should = require('should');
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
@@ -43,11 +43,11 @@ var data = {
 describe('simple jpath', function() {
 
     it('.id', function() {
-        no.jpath('.id', data).should.be.eql( [ 'two' ] );
+        no.jpath('.id', data).should.be.eql('two');
     });
 
     it('.a.b', function() {
-        no.jpath('.a.b', data).should.be.eql( [ 42 ] );
+        no.jpath('.a.b', data).should.be.eql(42);
     });
 
     it('.item.id', function() {
@@ -77,19 +77,19 @@ describe('jpath with predicate', function() {
 describe('root or self with predicate', function() {
 
     it('.[ .count > 0 ].count', function() {
-        no.jpath('.[ .count > 0 ].count', data).should.be.eql( [ 42 ] );
+        no.jpath('.[ .count > 0 ].count', data).should.be.eql(42);
     });
 
     it('.[ .count < 0 ].count', function() {
-        no.jpath('.[ .count < 0 ].count', data).should.be.eql( [] );
+        should.not.exist( no.jpath('.[ .count < 0 ].count', data) );
     });
 
     it('/[ .count > 0 ].count', function() {
-        no.jpath('/[ .count > 0 ].count', data).should.be.eql( [ 42 ] );
+        no.jpath('/[ .count > 0 ].count', data).should.be.eql(42);
     });
 
     it('/[ .count < 0 ].count', function() {
-        no.jpath('/[ .count < 0 ].count', data).should.be.eql( [] );
+        should.not.exist( no.jpath('/[ .count < 0 ].count', data) );
     });
 
 });
@@ -117,7 +117,7 @@ describe('jpath with index', function() {
 describe('jpath with variables', function() {
 
     it('config.foo.bar', function() {
-        no.jpath('config.foo.bar', {}, { config: { foo: { bar: 42 } } }).should.be.eql( [ 42 ] );
+        no.jpath('config.foo.bar', {}, { config: { foo: { bar: 42 } } }).should.be.eql(42);
     });
 
 
@@ -132,7 +132,7 @@ describe('jpath with guard', function() {
     });
 
     it('.item[ /.id != "two" ].id', function() {
-        no.jpath('.item[ .selected ][ /.id != "two" ].id', data).should.be.eql( [] );
+        should.not.exist( no.jpath('.item[ .selected ][ /.id != "two" ].id', data) );
     });
 
     it('.item[ /.id == "two" ][ .selected ].id', function() {
@@ -140,7 +140,7 @@ describe('jpath with guard', function() {
     });
 
     it('.item[ /.id != "two" ][ .selected ].id', function() {
-        no.jpath('.item[ /.id != "two" ][ .selected ].id', data).should.be.eql( [] );
+        should.not.exist( no.jpath('.item[ /.id != "two" ][ .selected ].id', data) );
     });
 
 });
@@ -355,39 +355,39 @@ describe('falsy jpaths', function() {
     };
 
     it('true', function() {
-        no.jpath('.foo[ .a ].c', data).should.be.eql( [ 42 ] );
+        no.jpath('.foo[ .a ].c', data).should.be.eql(42);
     });
 
     it('non-empty string', function() {
-        no.jpath('.foo[ .b ].c', data).should.be.eql( [ 42 ] );
+        no.jpath('.foo[ .b ].c', data).should.be.eql(42);
     });
 
     it('non-zero number', function() {
-        no.jpath('.foo[ .c ].c', data).should.be.eql( [ 42 ] );
+        no.jpath('.foo[ .c ].c', data).should.be.eql(42);
     });
 
     it('empty string', function() {
-        no.jpath('.foo[ .d ].c', data).should.be.eql( [] );
+        should.not.exist( no.jpath('.foo[ .d ].c', data) );
     });
 
     it('zero', function() {
-        no.jpath('.foo[ .e ].c', data).should.be.eql( [] );
+        should.not.exist( no.jpath('.foo[ .e ].c', data) );
     });
 
     it('null', function() {
-        no.jpath('.foo[ .f ].c', data).should.be.eql( [] );
+        should.not.exist( no.jpath('.foo[ .f ].c', data) );
     });
 
     it('false', function() {
-        no.jpath('.foo[ .g ].c', data).should.be.eql( [] );
+        should.not.exist( no.jpath('.foo[ .g ].c', data) );
     });
 
     it('undefined', function() {
-        no.jpath('.foo[ .h ].c', data).should.be.eql( [] );
+        should.not.exist( no.jpath('.foo[ .h ].c', data) );
     });
 
     it('non-existence key', function() {
-        no.jpath('.foo[ .z ].c', data).should.be.eql( [] );
+        should.not.exist( no.jpath('.foo[ .z ].c', data) );
     });
 
 });
@@ -410,19 +410,19 @@ describe('string interpolation', function() {
     });
 
     it('.foo.bar[ . == "hello" ]', function() {
-        no.jpath('.foo.bar[ . == "hello" ]', data).should.be.eql([ 'hello' ]);
+        no.jpath('.foo.bar[ . == "hello" ]', data).should.be.eql('hello');
     });
 
     it('.foo.bar[ . == "{ /.a }llo" ]', function() {
-        no.jpath('.foo.bar[ . == "{ /.a }llo" ]', data).should.be.eql([ 'hello' ]);
+        no.jpath('.foo.bar[ . == "{ /.a }llo" ]', data).should.be.eql('hello');
     });
 
     it('.foo.bar[ . == "{ /.a }ll{ /.c }" ]', function() {
-        no.jpath('.foo.bar[ . == "{ /.a }ll{ /.c }" ]', data).should.be.eql([ 'hello' ]);
+        no.jpath('.foo.bar[ . == "{ /.a }ll{ /.c }" ]', data).should.be.eql('hello');
     });
 
     it('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', function() {
-        no.jpath('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', data).should.be.eql([ 'hello' ]);
+        no.jpath('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', data).should.be.eql('hello');
     });
 
     it('"{ .foo }"', function() {
