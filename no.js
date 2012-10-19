@@ -7,6 +7,8 @@ require('./lib/no.jpath.js');
 require('./lib/no.promise.js');
 require('./lib/no.future.js');
 require('./lib/no.path.js');
+require('./lib/no.file.js');
+require('./lib/no.http.js');
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
