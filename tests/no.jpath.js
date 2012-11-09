@@ -482,5 +482,34 @@ describe('jresult', function() {
 
 });
 
+describe('escape symbols', function() {
+
+    var data = {
+        foo: '"hello"',
+        bar: '\\hello\\'
+    };
+
+    it('foo-{{ bar }}', function() {
+        no.jpath('"foo-{{ bar }}"').should.be.eql('foo-{ bar }');
+    });
+
+    it('foo-{{ bar }}', function() {
+        no.jpath.compile('foo-{{ bar }}', 'string_content')().should.be.eql('foo-{ bar }');
+    });
+
+    it('.foo[ . == "\\\"hello\\\"" ]', function() {
+        no.jpath('.foo[ . == "\\\"hello\\\"" ]', data).should.be.eql('"hello"');
+    });
+
+    it('.foo[ . == "\\"hello\\"" ]', function() {
+        no.jpath('.foo[ . == "\\"hello\\"" ]', data).should.be.eql('"hello"');
+    });
+
+    it('.foo[ . == "\\hello\\" ]', function() {
+        no.jpath('.bar[ . == "\\hello\\\\" ]', data).should.be.eql('\\hello\\');
+    });
+
+});
+
 //  ---------------------------------------------------------------------------------------------------------------  //
 
