@@ -494,7 +494,7 @@ describe('escape symbols', function() {
     });
 
     it('foo-{{ bar }}', function() {
-        no.jpath.compile('foo-{{ bar }}', 'string_content')().should.be.eql('foo-{ bar }');
+        no.jpath.string('foo-{{ bar }}')().should.be.eql('foo-{ bar }');
     });
 
     it('.foo[ . == "\\\"hello\\\"" ]', function() {
