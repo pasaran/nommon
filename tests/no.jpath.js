@@ -458,7 +458,6 @@ describe('string interpolation', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
-/*
 describe('jresult', function() {
 
     var data = {
@@ -480,7 +479,7 @@ describe('jresult', function() {
     };
 
     it('jresult #1', function() {
-        no.jpath({
+        select({
             selected: '.item[ .selected ]'
         }, data).should.be.eql({
             selected: [
@@ -491,7 +490,7 @@ describe('jresult', function() {
     });
 
     it('jresult #2', function() {
-        no.jpath({
+        select({
             foo: '.foo.bar',
             ids: '.item.id'
         }, data).should.be.eql({
@@ -505,7 +504,6 @@ describe('jresult', function() {
     });
 
 });
-*/
 
 describe('escape symbols', function() {
 
