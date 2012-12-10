@@ -72,11 +72,9 @@ describe('simple jpath', function() {
 
 describe('jpath with predicate', function() {
 
-    /*
     it('.item[ .selected ].id', function() {
         select('.item[ .selected ].id', data).should.be.eql( [ 'two', 'four' ] );
     });
-    */
 
     it('.item[ .count > 20 ].id', function() {
         select('.item[ .count > 20 ].id', data).should.be.eql( [ 'one', 'four', 'five' ] );
@@ -112,11 +110,9 @@ describe('jpath with index', function() {
         select('.item[2].id', data).should.be.eql( [ 'three' ] );
     });
 
-    /*
     it('.item[ /.index ].id', function() {
         select('.item[ /.index ].id', data).should.be.eql( [ 'three' ] );
     });
-    */
 
     it('.item[ index ].id', function() {
         select('.item[ index ].id', data, { index: 2 }).should.be.eql( [ 'three' ] );
@@ -140,21 +136,17 @@ describe('jpath with variables', function() {
 
 describe('jpath with guard', function() {
 
-    /*
     it('.item[ .selected ][ /.id == "two" ].id', function() {
         select('.item[ .selected ][ /.id == "two" ].id', data).should.be.eql( [ 'two', 'four' ] );
     });
-    */
 
     it('.item[ /.id != "two" ].id', function() {
         select('.item[ .selected ][ /.id != "two" ].id', data).should.be.eql( [] );
     });
 
-    /*
     it('.item[ /.id == "two" ][ .selected ].id', function() {
         select('.item[ /.id == "two" ][ .selected ].id', data).should.be.eql( [ 'two', 'four' ] );
     });
-    */
 
     it('.item[ /.id != "two" ][ .selected ].id', function() {
         select('.item[ /.id != "two" ][ .selected ].id', data).should.be.eql( [] );
@@ -381,17 +373,16 @@ describe('falsy jpaths', function() {
         }
     };
 
-    /*
     it('true', function() {
-        no.jpath('.foo[ .a ].c', data).should.be.eql( [ 42 ] );
+        select('.foo[ .a ].c', data).should.be.eql( [ 42 ] );
     });
 
     it('non-empty string', function() {
-        no.jpath('.foo[ .b ].c', data).should.be.eql( [ 42 ] );
+        select('.foo[ .b ].c', data).should.be.eql( [ 42 ] );
     });
 
     it('non-zero number', function() {
-        no.jpath('.foo[ .c ].c', data).should.be.eql( [ 42 ] );
+        select('.foo[ .c ].c', data).should.be.eql( [ 42 ] );
     });
 
     it('empty string', function() {
@@ -417,7 +408,6 @@ describe('falsy jpaths', function() {
     it('non-existence key', function() {
         select('.foo[ .z ].c', data).should.be.eql( [] );
     });
-    */
 
 });
 
