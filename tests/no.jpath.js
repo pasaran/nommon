@@ -164,7 +164,6 @@ describe('jpath with guard', function() {
 
 describe('compare nodeset to nodeset', function() {
 
-    /*
     it('.item.id == .ids1', function() {
         select('.item.id == .ids1', data).should.be.ok;
     });
@@ -172,7 +171,6 @@ describe('compare nodeset to nodeset', function() {
     it('.item.id != .ids1', function() {
         select('.item.id != .ids1', data).should.not.be.ok;
     });
-    */
 
     it('.item.id == .ids2', function() {
         select('.item.id == .ids2', data).should.not.be.ok;
@@ -182,7 +180,6 @@ describe('compare nodeset to nodeset', function() {
         select('.item.id != .ids2', data).should.be.ok;
     });
 
-    /*
     it('.item.id == .ids3', function() {
         select('.item.id == .ids3', data).should.be.ok;
     });
@@ -202,7 +199,6 @@ describe('compare nodeset to nodeset', function() {
     it('.item[ .id == /.ids3 ]', function() {
         select('.item[ .id == /.ids3 ].id', data).should.be.eql( [ 'one' ] );
     });
-    */
 
     it('.count == .a.b', function() {
         select('.count == .a.b', data).should.be.ok;
@@ -212,11 +208,9 @@ describe('compare nodeset to nodeset', function() {
         select('.count == .p.q', data).should.not.be.ok;
     });
 
-    /*
     it('.a.*[ . == /.p.* ]', function() {
         select('.a.*[ . == /.p.* ]', data).should.be.eql( [ 24, 66 ] );
     });
-    */
 
     it('.item[ .count == /.a.* ].id', function() {
         select('.item[ .count == /.a.* ].id', data).should.be.eql( [ 'one', 'five' ] );
@@ -233,38 +227,36 @@ describe('compare nodeset to nodeset', function() {
 describe('compare nodeset to scalar', function() {
 
     it('.item.count == 42', function() {
-        no.jpath('.item.count == 42', data).should.be.ok;
+        select('.item.count == 42', data).should.be.ok;
     });
 
     it('.item.count != 42', function() {
-        no.jpath('.item.count != 42', data).should.not.be.ok;
+        select('.item.count != 42', data).should.not.be.ok;
     });
 
     it('.item.count == 84', function() {
-        no.jpath('.item.count == 84', data).should.not.be.ok;
+        select('.item.count == 84', data).should.not.be.ok;
     });
 
     it('.item.count != 84', function() {
-        no.jpath('.item.count != 84', data).should.be.ok;
+        select('.item.count != 84', data).should.be.ok;
     });
 
-    /*
     it('.item.id == "two"', function() {
-        no.jpath('.item.id == "two"', data).should.be.ok;
+        select('.item.id == "two"', data).should.be.ok;
     });
 
     it('.item.id != "two"', function() {
-        no.jpath('.item.id != "two"', data).should.not.be.ok;
+        select('.item.id != "two"', data).should.not.be.ok;
     });
 
     it('.item[ .id == "two" ]', function() {
-        no.jpath('.item[ .id == "two" ].id', data).should.be.eql( [ 'two' ] );
+        select('.item[ .id == "two" ].id', data).should.be.eql( [ 'two' ] );
     });
 
     it('.item[ .id != "two" ]', function() {
-        no.jpath('.item[ .id != "two" ].id', data).should.be.eql( [ 'one', 'three', 'four', 'five' ] );
+        select('.item[ .id != "two" ].id', data).should.be.eql( [ 'one', 'three', 'four', 'five' ] );
     });
-    */
 
 });
 
