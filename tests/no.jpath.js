@@ -114,21 +114,27 @@ describe('jpath with index', function() {
         select('.item[ /.index ].id', data).should.be.eql( [ 'three' ] );
     });
 
-    it('.item[ index ].id', function() {
-        select('.item[ index ].id', data, { index: 2 }).should.be.eql( [ 'three' ] );
-    });
-
 });
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
-describe('jpath with variables', function() {
+describe('variables', function() {
 
-    /*
     it('config.foo.bar', function() {
-        no.jpath('config.foo.bar', {}, { config: { foo: { bar: 42 } } }).should.be.eql(42);
+        select('config.foo.bar', {}, { config: { foo: { bar: 42 } } }).should.be.eql( [ 42 ] );
     });
-    */
+
+    it('.item[ index ].id', function() {
+        select('.item[ index ].id', data, { index: 2 }).should.be.eql( [ 'three' ] );
+    });
+
+    it('index', function() {
+        select('index', {}, { index: 42 }).should.be.eql( [ 42 ] );
+    });
+
+    it('config', function() {
+        select('config', {}, { config: { foo: 42 } }).should.be.eql( [ { foo: 42 } ] );
+    });
 
 });
 
