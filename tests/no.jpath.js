@@ -526,5 +526,74 @@ describe('escape symbols', function() {
 
 });
 
+//  https://github.com/pasaran/nommon/issues/5
+describe('nested arrays', function() {
+
+    var data1 = {
+        foo: [
+            {
+                bar: [ 42, 24 ]
+            },
+            {
+                bar: 66
+            }
+        ]
+    };
+
+    it('.foo.bar', function() {
+        select('.foo.bar', data1).should.be.eql( [ [ 42, 24 ], 66 ] );
+    });
+
+    it('.foo.*', function() {
+        select('.foo.bar', data1).should.be.eql( [ [ 42, 24 ], 66 ] );
+    });
+
+    var data2 = {
+        foo: [
+            {
+                bar: [
+                    {
+                        boo: [ 42, 24 ]
+                    },
+                    {
+                        boo: 66
+                    }
+                ]
+            },
+            {
+                bar: [
+                    {
+                        boo: 73
+                    },
+                    {
+                        boo: [ 29, 44 ]
+                    }
+                ]
+            }
+        ]
+    };
+
+    it('.foo.bar.boo', function() {
+        select('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+    });
+
+    it('.foo.*.boo', function() {
+        select('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+    });
+
+    it('.foo.bar.*', function() {
+        select('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+    });
+
+    it('.foo.*.*', function() {
+        select('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+    });
+
+    it('.*.*.*', function() {
+        select('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+    });
+
+});
+
 //  ---------------------------------------------------------------------------------------------------------------  //
 
