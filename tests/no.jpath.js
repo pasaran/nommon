@@ -220,6 +220,14 @@ describe('compare nodeset to nodeset', function() {
         select('.item[ .id == /.id ].id', data).should.be.eql( [ 'two' ] );
     });
 
+    it('.ids1 == .ids2', function() {
+        select('.ids1 == .ids2', data).should.be.not.ok;
+    });
+
+    it('.ids2 == .ids3', function() {
+        select('.ids2 == .ids3', data).should.be.ok;
+    });
+
 });
 
 //  ---------------------------------------------------------------------------------------------------------------  //
