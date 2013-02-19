@@ -2,14 +2,6 @@ var no = require('../lib');
 
 var should = require('should');
 
-function select(jpath, data, vars) {
-    var r = no.jpath(jpath, data, vars);
-    if (r instanceof no.JNode || r instanceof no.JNodeset) {
-        return r.toArray();
-    }
-    return r;
-}
-
 //  ---------------------------------------------------------------------------------------------------------------  //
 
 var data = {
@@ -51,19 +43,19 @@ var data = {
 describe('simple jpath', function() {
 
     it('.id', function() {
-        select('.id', data).should.be.eql( [ 'two' ] );
+        no.jpath('.id', data).should.be.eql('two');
     });
 
     it('.a.b', function() {
-        select('.a.b', data).should.be.eql( [ 42 ] );
+        no.jpath('.a.b', data).should.be.eql(42);
     });
 
     it('.item.id', function() {
-        select('.item.id', data).should.be.eql( [ 'one', 'two', 'three', 'four', 'five' ] );
+        no.jpath('.item.id', data).should.be.eql( [ 'one', 'two', 'three', 'four', 'five' ] );
     });
 
     it('.a.*', function() {
-        select('.a.*', data).should.be.eql( [ 42, 24, 66 ] );
+        no.jpath('.a.*', data).should.be.eql( [ 42, 24, 66 ] );
     });
 
 });
@@ -73,11 +65,11 @@ describe('simple jpath', function() {
 describe('jpath with predicate', function() {
 
     it('.item[ .selected ].id', function() {
-        select('.item[ .selected ].id', data).should.be.eql( [ 'two', 'four' ] );
+        no.jpath('.item[ .selected ].id', data).should.be.eql( [ 'two', 'four' ] );
     });
 
     it('.item[ .count > 20 ].id', function() {
-        select('.item[ .count > 20 ].id', data).should.be.eql( [ 'one', 'four', 'five' ] );
+        no.jpath('.item[ .count > 20 ].id', data).should.be.eql( [ 'one', 'four', 'five' ] );
     });
 
 });
@@ -85,19 +77,19 @@ describe('jpath with predicate', function() {
 describe('root or self with predicate', function() {
 
     it('.[ .count > 0 ].count', function() {
-        select('.[ .count > 0 ].count', data).should.be.eql( [ 42 ] );
+        no.jpath('.[ .count > 0 ].count', data).should.be.eql(42);
     });
 
     it('.[ .count < 0 ].count', function() {
-        select('.[ .count < 0 ].count', data).should.be.eql( [] );
+        no.jpath('.[ .count < 0 ].count', data).should.be.eql( [] );
     });
 
     it('/[ .count > 0 ].count', function() {
-        select('/[ .count > 0 ].count', data).should.be.eql( [ 42 ] );
+        no.jpath('/[ .count > 0 ].count', data).should.be.eql(42);
     });
 
     it('/[ .count < 0 ].count', function() {
-        select('/[ .count < 0 ].count', data).should.be.eql( [] );
+        no.jpath('/[ .count < 0 ].count', data).should.be.eql( [] );
     });
 
 });
@@ -107,11 +99,11 @@ describe('root or self with predicate', function() {
 describe('jpath with index', function() {
 
     it('.item[2].id', function() {
-        select('.item[2].id', data).should.be.eql( [ 'three' ] );
+        no.jpath('.item[2].id', data).should.be.eql( [ 'three' ] );
     });
 
     it('.item[ /.index ].id', function() {
-        select('.item[ /.index ].id', data).should.be.eql( [ 'three' ] );
+        no.jpath('.item[ /.index ].id', data).should.be.eql( [ 'three' ] );
     });
 
 });
@@ -121,19 +113,19 @@ describe('jpath with index', function() {
 describe('variables', function() {
 
     it('config.foo.bar', function() {
-        select('config.foo.bar', {}, { config: { foo: { bar: 42 } } }).should.be.eql( [ 42 ] );
+        no.jpath('config.foo.bar', {}, { config: { foo: { bar: 42 } } }).should.be.eql(42);
     });
 
     it('.item[ index ].id', function() {
-        select('.item[ index ].id', data, { index: 2 }).should.be.eql( [ 'three' ] );
+        no.jpath('.item[ index ].id', data, { index: 2 }).should.be.eql( [ 'three' ] );
     });
 
     it('index', function() {
-        select('index', {}, { index: 42 }).should.be.eql( [ 42 ] );
+        no.jpath('index', {}, { index: 42 }).should.be.eql(42);
     });
 
     it('config', function() {
-        select('config', {}, { config: { foo: 42 } }).should.be.eql( [ { foo: 42 } ] );
+        no.jpath('config', {}, { config: { foo: 42 } }).should.be.eql( { foo: 42 } );
     });
 
 });
@@ -143,19 +135,19 @@ describe('variables', function() {
 describe('jpath with guard', function() {
 
     it('.item[ .selected ][ /.id == "two" ].id', function() {
-        select('.item[ .selected ][ /.id == "two" ].id', data).should.be.eql( [ 'two', 'four' ] );
+        no.jpath('.item[ .selected ][ /.id == "two" ].id', data).should.be.eql( [ 'two', 'four' ] );
     });
 
     it('.item[ /.id != "two" ].id', function() {
-        select('.item[ .selected ][ /.id != "two" ].id', data).should.be.eql( [] );
+        no.jpath('.item[ .selected ][ /.id != "two" ].id', data).should.be.eql( [] );
     });
 
     it('.item[ /.id == "two" ][ .selected ].id', function() {
-        select('.item[ /.id == "two" ][ .selected ].id', data).should.be.eql( [ 'two', 'four' ] );
+        no.jpath('.item[ /.id == "two" ][ .selected ].id', data).should.be.eql( [ 'two', 'four' ] );
     });
 
     it('.item[ /.id != "two" ][ .selected ].id', function() {
-        select('.item[ /.id != "two" ][ .selected ].id', data).should.be.eql( [] );
+        no.jpath('.item[ /.id != "two" ][ .selected ].id', data).should.be.eql( [] );
     });
 
 });
@@ -165,83 +157,83 @@ describe('jpath with guard', function() {
 describe('compare nodeset to nodeset', function() {
 
     it('.item.id == .ids1', function() {
-        select('.item.id == .ids1', data).should.be.ok;
+        no.jpath('.item.id == .ids1', data).should.be.ok;
     });
 
     it('.item.id != .ids1', function() {
-        select('.item.id != .ids1', data).should.not.be.ok;
+        no.jpath('.item.id != .ids1', data).should.not.be.ok;
     });
 
     it('.item.id == .ids2', function() {
-        select('.item.id == .ids2', data).should.not.be.ok;
+        no.jpath('.item.id == .ids2', data).should.not.be.ok;
     });
 
     it('.item.id != .ids2', function() {
-        select('.item.id != .ids2', data).should.be.ok;
+        no.jpath('.item.id != .ids2', data).should.be.ok;
     });
 
     it('.item.id == .ids3', function() {
-        select('.item.id == .ids3', data).should.be.ok;
+        no.jpath('.item.id == .ids3', data).should.be.ok;
     });
 
     it('.item.id != .ids3', function() {
-        select('.item.id != .ids3', data).should.not.be.ok;
+        no.jpath('.item.id != .ids3', data).should.not.be.ok;
     });
 
     it('.item[ .id == /.ids1 ]', function() {
-        select('.item[ .id == /.ids1 ].id', data).should.be.eql( [ 'two', 'three', 'five' ] );
+        no.jpath('.item[ .id == /.ids1 ].id', data).should.be.eql( [ 'two', 'three', 'five' ] );
     });
 
     it('.item[ .id == /.ids2 ]', function() {
-        select('.item[ .id == /.ids2 ].id', data).should.be.eql( [] );
+        no.jpath('.item[ .id == /.ids2 ].id', data).should.be.eql( [] );
     });
 
     it('.item[ .id == /.ids3 ]', function() {
-        select('.item[ .id == /.ids3 ].id', data).should.be.eql( [ 'one' ] );
+        no.jpath('.item[ .id == /.ids3 ].id', data).should.be.eql( [ 'one' ] );
     });
 
     it('.count == .a.b', function() {
-        select('.count == .a.b', data).should.be.ok;
+        no.jpath('.count == .a.b', data).should.be.ok;
     });
 
     it('.count == .p.q', function() {
-        select('.count == .p.q', data).should.not.be.ok;
+        no.jpath('.count == .p.q', data).should.not.be.ok;
     });
 
     it('.a.*[ . == /.p.* ]', function() {
-        select('.a.*[ . == /.p.* ]', data).should.be.eql( [ 24, 66 ] );
+        no.jpath('.a.*[ . == /.p.* ]', data).should.be.eql( [ 24, 66 ] );
     });
 
     it('.item[ .count == /.a.* ].id', function() {
-        select('.item[ .count == /.a.* ].id', data).should.be.eql( [ 'one', 'five' ] );
+        no.jpath('.item[ .count == /.a.* ].id', data).should.be.eql( [ 'one', 'five' ] );
     });
 
     it('.item[ .id == /.id ].id', function() {
-        select('.item[ .id == /.id ].id', data).should.be.eql( [ 'two' ] );
+        no.jpath('.item[ .id == /.id ].id', data).should.be.eql( [ 'two' ] );
     });
 
     it('.ids1 == .ids2', function() {
-        select('.ids1 == .ids2', data).should.not.be.ok;
+        no.jpath('.ids1 == .ids2', data).should.not.be.ok;
     });
 
     it('.ids2 == .ids3', function() {
-        select('.ids2 == .ids3', data).should.be.ok;
+        no.jpath('.ids2 == .ids3', data).should.be.ok;
     });
 
     it('.ids1 == "two"', function() {
-        select('.ids1 == "two"', data).should.be.ok;
+        no.jpath('.ids1 == "two"', data).should.be.ok;
     });
 
     it('.ids1 != "two"', function() {
-        select('.ids1 != "two"', data).should.not.be.ok;
+        no.jpath('.ids1 != "two"', data).should.not.be.ok;
     });
 
     it('.ids1 == "one"', function() {
-        select('.ids1 == "one"', data).should.not.be.ok;
+        no.jpath('.ids1 == "one"', data).should.not.be.ok;
     });
 
     it('.ids1 != "one"', function() {
-        select('.ids1 != "one"', data).should.be.ok;
+        no.jpath('.ids1 != "one"', data).should.be.ok;
     });
 
 });
@@ -251,35 +243,35 @@ describe('compare nodeset to nodeset', function() {
 describe('compare nodeset to scalar', function() {
 
     it('.item.count == 42', function() {
-        select('.item.count == 42', data).should.be.ok;
+        no.jpath('.item.count == 42', data).should.be.ok;
     });
 
     it('.item.count != 42', function() {
-        select('.item.count != 42', data).should.not.be.ok;
+        no.jpath('.item.count != 42', data).should.not.be.ok;
     });
 
     it('.item.count == 84', function() {
-        select('.item.count == 84', data).should.not.be.ok;
+        no.jpath('.item.count == 84', data).should.not.be.ok;
     });
 
     it('.item.count != 84', function() {
-        select('.item.count != 84', data).should.be.ok;
+        no.jpath('.item.count != 84', data).should.be.ok;
     });
 
     it('.item.id == "two"', function() {
-        select('.item.id == "two"', data).should.be.ok;
+        no.jpath('.item.id == "two"', data).should.be.ok;
     });
 
     it('.item.id != "two"', function() {
-        select('.item.id != "two"', data).should.not.be.ok;
+        no.jpath('.item.id != "two"', data).should.not.be.ok;
     });
 
     it('.item[ .id == "two" ]', function() {
-        select('.item[ .id == "two" ].id', data).should.be.eql( [ 'two' ] );
+        no.jpath('.item[ .id == "two" ].id', data).should.be.eql( [ 'two' ] );
     });
 
     it('.item[ .id != "two" ]', function() {
-        select('.item[ .id != "two" ].id', data).should.be.eql( [ 'one', 'three', 'four', 'five' ] );
+        no.jpath('.item[ .id != "two" ].id', data).should.be.eql( [ 'one', 'three', 'four', 'five' ] );
     });
 
 });
@@ -396,39 +388,39 @@ describe('falsy jpaths', function() {
     };
 
     it('true', function() {
-        select('.foo[ .a ].c', data).should.be.eql( [ 42 ] );
+        no.jpath('.foo[ .a ].c', data).should.be.eql(42);
     });
 
     it('non-empty string', function() {
-        select('.foo[ .b ].c', data).should.be.eql( [ 42 ] );
+        no.jpath('.foo[ .b ].c', data).should.be.eql(42);
     });
 
     it('non-zero number', function() {
-        select('.foo[ .c ].c', data).should.be.eql( [ 42 ] );
+        no.jpath('.foo[ .c ].c', data).should.be.eql(42);
     });
 
     it('empty string', function() {
-        select('.foo[ .d ].c', data).should.be.eql( [] );
+        no.jpath('.foo[ .d ].c', data).should.be.eql( [] );
     });
 
     it('zero', function() {
-        select('.foo[ .e ].c', data).should.be.eql( [] );
+        no.jpath('.foo[ .e ].c', data).should.be.eql( [] );
     });
 
     it('null', function() {
-        select('.foo[ .f ].c', data).should.be.eql( [] );
+        no.jpath('.foo[ .f ].c', data).should.be.eql( [] );
     });
 
     it('false', function() {
-        select('.foo[ .g ].c', data).should.be.eql( [] );
+        no.jpath('.foo[ .g ].c', data).should.be.eql( [] );
     });
 
     it('undefined', function() {
-        select('.foo[ .h ].c', data).should.be.eql( [] );
+        no.jpath('.foo[ .h ].c', data).should.be.eql( [] );
     });
 
     it('non-existence key', function() {
-        select('.foo[ .z ].c', data).should.be.eql( [] );
+        no.jpath('.foo[ .z ].c', data).should.be.eql( [] );
     });
 
 });
@@ -447,27 +439,27 @@ describe('string interpolation', function() {
     };
 
     it('"{ .a }{ .b }"', function() {
-        select('"{ .a }{ .b }{ .c }"', data).should.be.eql('hello');
+        no.jpath('"{ .a }{ .b }{ .c }"', data).should.be.eql('hello');
     });
 
     it('.foo.bar[ . == "hello" ]', function() {
-        select('.foo.bar[ . == "hello" ]', data).should.be.eql( [ 'hello' ] );
+        no.jpath('.foo.bar[ . == "hello" ]', data).should.be.eql('hello');
     });
 
     it('.foo.bar[ . == "{ /.a }llo" ]', function() {
-        select('.foo.bar[ . == "{ /.a }llo" ]', data).should.be.eql( [ 'hello' ] );
+        no.jpath('.foo.bar[ . == "{ /.a }llo" ]', data).should.be.eql('hello');
     });
 
     it('.foo.bar[ . == "{ /.a }ll{ /.c }" ]', function() {
-        select('.foo.bar[ . == "{ /.a }ll{ /.c }" ]', data).should.be.eql( [ 'hello' ] );
+        no.jpath('.foo.bar[ . == "{ /.a }ll{ /.c }" ]', data).should.be.eql('hello');
     });
 
     it('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', function() {
-        select('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', data).should.be.eql( [ 'hello' ] );
+        no.jpath('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', data).should.be.eql('hello');
     });
 
     it('"{ .foo }"', function() {
-        select('"{ .foo }"', data).should.be.eql('');
+        no.jpath('"{ .foo }"', data).should.be.eql('');
     });
 
 });
@@ -495,7 +487,7 @@ describe('jresult', function() {
     };
 
     it('jresult #1', function() {
-        select({
+        no.jpath({
             selected: '.item[ .selected ]'
         }, data).should.be.eql({
             selected: [
@@ -506,7 +498,7 @@ describe('jresult', function() {
     });
 
     it('jresult #2', function() {
-        select({
+        no.jpath({
             foo: '.foo.bar',
             ids: '.item.id'
         }, data).should.be.eql({
@@ -529,7 +521,7 @@ describe('escape symbols', function() {
     };
 
     it('foo-{{ bar }}', function() {
-        select('"foo-{{ bar }}"').should.be.eql('foo-{ bar }');
+        no.jpath('"foo-{{ bar }}"').should.be.eql('foo-{ bar }');
     });
 
     it('foo-{{ bar }}', function() {
@@ -537,20 +529,22 @@ describe('escape symbols', function() {
     });
 
     it('.foo[ . == "\\\"hello\\\"" ]', function() {
-        select('.foo[ . == "\\\"hello\\\"" ]', data).should.be.eql( [ '"hello"' ] );
+        no.jpath('.foo[ . == "\\\"hello\\\"" ]', data).should.be.eql('"hello"');
     });
 
     it('.foo[ . == "\\"hello\\"" ]', function() {
-        select('.foo[ . == "\\"hello\\"" ]', data).should.be.eql( [ '"hello"' ] );
+        no.jpath('.foo[ . == "\\"hello\\"" ]', data).should.be.eql('"hello"');
     });
 
     it('.foo[ . == "\\hello\\" ]', function() {
-        select('.bar[ . == "\\hello\\\\" ]', data).should.be.eql( [ '\\hello\\' ] );
+        no.jpath('.bar[ . == "\\hello\\\\" ]', data).should.be.eql('\\hello\\');
     });
 
 });
 
+//  Обсуждение вложенных массивов.
 //  https://github.com/pasaran/nommon/issues/5
+//
 describe('nested arrays', function() {
 
     var data1 = {
@@ -565,11 +559,11 @@ describe('nested arrays', function() {
     };
 
     it('.foo.bar', function() {
-        select('.foo.bar', data1).should.be.eql( [ [ 42, 24 ], 66 ] );
+        no.jpath('.foo.bar', data1).should.be.eql( [ [ 42, 24 ], 66 ] );
     });
 
     it('.foo.*', function() {
-        select('.foo.bar', data1).should.be.eql( [ [ 42, 24 ], 66 ] );
+        no.jpath('.foo.bar', data1).should.be.eql( [ [ 42, 24 ], 66 ] );
     });
 
     var data2 = {
@@ -598,23 +592,39 @@ describe('nested arrays', function() {
     };
 
     it('.foo.bar.boo', function() {
-        select('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+        no.jpath('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
     });
 
     it('.foo.*.boo', function() {
-        select('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+        no.jpath('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
     });
 
     it('.foo.bar.*', function() {
-        select('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+        no.jpath('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
     });
 
     it('.foo.*.*', function() {
-        select('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+        no.jpath('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
     });
 
     it('.*.*.*', function() {
-        select('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+        no.jpath('.foo.bar.boo', data2).should.be.eql( [ [ 42, 24 ], 66, 73, [ 29, 44 ] ] );
+    });
+
+});
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
+describe('jresults', function() {
+
+    it('simplie object', function() {
+        no.jpath({
+            id: '.id',
+            count: '.count'
+        }, data).should.be.eql({
+            count: 42,
+            id: 'two'
+        });
     });
 
 });
