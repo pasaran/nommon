@@ -336,19 +336,19 @@ describe('empty strings', function() {
     });
 
     it('.hello != ""', function() {
-        no.jpath('.hello != ""', data).should.be.ok();
+        no.jpath('.hello != ""', data).should.be.ok;
     });
 
     it('.hello == ""', function() {
-        no.jpath('.hello == ""', data).should.not.be.ok();
+        no.jpath('.hello == ""', data).should.not.be.ok;
     });
 
     it('.empty != ""', function() {
-        no.jpath('.empty != ""', data).should.not.be.ok();
+        no.jpath('.empty != ""', data).should.not.be.ok;
     });
 
     it('.empty == ""', function() {
-        no.jpath('.empty == ""', data).should.be.ok();
+        no.jpath('.empty == ""', data).should.be.ok;
     });
 
 });
