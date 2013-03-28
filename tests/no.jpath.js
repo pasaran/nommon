@@ -274,6 +274,10 @@ describe('compare nodeset to scalar', function() {
         no.jpath('.item[ .id != "two" ].id', data).should.be.eql( [ 'one', 'three', 'four', 'five' ] );
     });
 
+    it('.item[ .id != "" ]', function() {
+        no.jpath('.item[ .id != "" ].id', data).should.be.eql( [ 'one', 'two', 'three', 'four', 'five' ] );
+    });
+
 });
 
 //  ---------------------------------------------------------------------------------------------------------------  //
@@ -314,6 +318,37 @@ describe('arithmetic operations', function() {
 
     it('( .x + .y ) * ( .z + .t )', function() {
         no.jpath('( .x + .y ) * ( .z + .t )', data).should.be.eql(143);
+    });
+
+});
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
+describe('empty strings', function() {
+
+    var data = {
+        hello: 'Hello',
+        empty: ''
+    };
+
+    it('""', function() {
+        no.jpath('""').should.be.eql('');
+    });
+
+    it('.hello != ""', function() {
+        no.jpath('.hello != ""', data).should.be.ok();
+    });
+
+    it('.hello == ""', function() {
+        no.jpath('.hello == ""', data).should.not.be.ok();
+    });
+
+    it('.empty != ""', function() {
+        no.jpath('.empty != ""', data).should.not.be.ok();
+    });
+
+    it('.empty == ""', function() {
+        no.jpath('.empty == ""', data).should.be.ok();
     });
 
 });
