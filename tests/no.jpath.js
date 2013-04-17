@@ -652,7 +652,7 @@ describe('nested arrays', function() {
 
 describe('jresults', function() {
 
-    it('simplie object', function() {
+    it('simple object', function() {
         no.jpath({
             id: '.id',
             count: '.count'
@@ -660,6 +660,31 @@ describe('jresults', function() {
             count: 42,
             id: 'two'
         });
+    });
+
+});
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
+describe('no.jpath.set', function() {
+
+    it('test #1', function() {
+        var data = {};
+        no.jpath.set('.foo', data, 42).should.be.eql( { foo: 42 } );
+        no.jpath.set('.bar', data, 24).should.be.eql( { foo: 42, bar: 24 } );
+        no.jpath.set('.foo', data, 66).should.be.eql( { foo: 66, bar: 24 } );
+        no.jpath.set('.foo.bar', data, 37).should.be.eql( { foo: 66, bar: 24 } );
+    });
+
+    it('test #2', function() {
+        var data = {};
+        no.jpath.set('.foo.bar.qoo', data, 42).should.be.eql( { foo: { bar: { qoo: 42 } } } );
+        no.jpath.set('.foo.bar', data, 42).should.be.eql( { foo: { bar: 42 } } );
+    });
+
+    it('test #3', function() {
+        var data = { foo: null };
+        no.jpath.set('.foo.bar', data, 42).should.be.eql( { foo: { bar: 42 } } );
     });
 
 });
