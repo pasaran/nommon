@@ -16,7 +16,7 @@
         "node": "*"
     },
     "dependencies": {
-        "no.base": "0.0.1",
+        "no.base": "0.0.3",
         "no.events": "0.0.2",
         "no.promise": "0.0.1",
         "no.jpath": "0.0.1"
