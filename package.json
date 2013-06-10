@@ -6,7 +6,7 @@
     },
     "name": "nommon",
     "description": "nop's common",
-    "version": "0.0.18",
+    "version": "0.0.19",
     "homepage": "https://github.com/pasaran/nommon",
     "repository": {
         "type": "git",
@@ -14,12 +14,6 @@
     },
     "engines": {
         "node": "*"
-    },
-    "dependencies": {
-        "no.base": "0.0.3",
-        "no.events": "0.0.2",
-        "no.promise": "0.0.1",
-        "no.jpath": "0.0.1"
     },
     "main": "lib/index.js",
     "files": [
