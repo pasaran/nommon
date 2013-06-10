@@ -15,10 +15,17 @@
     "engines": {
         "node": "*"
     },
+    "devDependencies": {
+        "expect.js": "*",
+        "mocha": "*"
+    },
     "main": "lib/index.js",
     "files": [
         "lib/index.js",
         "lib/no.*.js"
-    ]
+    ],
+    "scripts": {
+          "test": "make tests"
+    }
 }
 
