@@ -62,10 +62,6 @@ describe('simple jpath', function() {
         expect( no.jpath('.ids1', data) ).to.eql( [ 'two', 'three', 'five' ] );
     });
 
-    it('.ids1', function() {
-        expect( no.jpath.expr('.ids1')(data).toArray() ).to.eql( [ 'two', 'three', 'five' ] );
-    });
-
 });
 
 //  ---------------------------------------------------------------------------------------------------------------  //
