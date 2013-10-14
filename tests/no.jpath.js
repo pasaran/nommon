@@ -505,6 +505,28 @@ describe('string interpolation', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
+describe('funcs', function() {
+
+    var data = {
+        text: 'Привет'
+    };
+
+    var funcs = {
+        encode: function(s) {
+            return encodeURIComponent(s);
+        }
+    };
+
+    it('encode', function() {
+        expect(
+            no.jpath('"http://yandex.ru/yandsearch?text={ encode(.text) }"', data, null, funcs)
+        ).to.eql('http://yandex.ru/yandsearch?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82')
+    });
+
+});
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
 describe('jresult', function() {
 
     var data = {
