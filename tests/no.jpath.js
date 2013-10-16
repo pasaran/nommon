@@ -466,6 +466,58 @@ describe('falsy jpaths', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
+describe('short-circuit evaluation', function() {
+
+    var data = {
+        a: 0,
+        b: false,
+        c: '',
+        //  d: undefined
+        e: 24,
+        f: true,
+        g: 'foo'
+    };
+
+    it('.a || 42', function() {
+        expect( no.jpath('.a || 42', data) ).to.be(42);
+    });
+
+    it('.b || 42', function() {
+        expect( no.jpath('.b || 42', data) ).to.be(42);
+    });
+
+    it('.c || 42', function() {
+        expect( no.jpath('.c || 42', data) ).to.be(42);
+    });
+
+    it('.d || 42', function() {
+        expect( no.jpath('.d || 42', data) ).to.be(42);
+    });
+
+    it('.a || .b || .c || .d || 42', function() {
+        expect( no.jpath('.a || .b || .c || .d || 42', data) ).to.be(42);
+    });
+
+    it('.e || 42', function() {
+        expect( no.jpath('.e || 42', data) ).to.be(24);
+    });
+
+    it('.f || 42', function() {
+        expect( no.jpath('.f || 42', data) ).to.be(true);
+    });
+
+    it('.g || 42', function() {
+        expect( no.jpath('.g || 42', data) ).to.be('foo');
+    });
+
+    it('.a == 0 && .g == "foo"', function() {
+        expect( no.jpath('.a == 0 && .g == "foo"', data) ).to.be(true);
+    });
+
+});
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
 describe('string interpolation', function() {
 
     var data = {
@@ -499,6 +551,10 @@ describe('string interpolation', function() {
 
     it('"{ .foo }"', function() {
         expect( no.jpath('"{ .foo }"', data) ).to.be('');
+    });
+
+    it('"{ .bar }"', function() {
+        expect( no.jpath('"{ .bar }"', data) ).to.be('');
     });
 
 });
