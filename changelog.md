@@ -5,6 +5,9 @@
   * Не используем больше нигде `instanceof Array` т.к. это не работет в файлах,
     исполняемых через разные виды eval'а.
 
+  * [shims/string] Не трогаем прототип, все уносим в `no.string.*`.
+    При eval'е файлов, очень трудно добиться, чтобы в них работали методы из, например, `String.prototype`.
+
 ## 0.0.27
 
   * [shims/string] `String.prototype.repeat` и `String.prototype.padLeft`.
