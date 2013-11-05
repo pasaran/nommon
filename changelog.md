@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.27
+
+  * [shims/string] `String.prototype.repeat` и `String.prototype.padLeft`.
+  * [no.date] Подключаем `shims/string.js`.
+
 ## 0.0.26
 
   * [no.date] Формат `%f` для того, чтобы выводить секунды с точностью до одной тысячной.
