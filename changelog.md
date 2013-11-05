@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.28
+
+  * Не используем больше нигде `instanceof Array` т.к. это не работет в файлах,
+    исполняемых через разные виды eval'а.
+
 ## 0.0.27
 
   * [shims/string] `String.prototype.repeat` и `String.prototype.padLeft`.
