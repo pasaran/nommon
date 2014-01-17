@@ -60,3 +60,23 @@ describe('async', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
+describe('off', function() {
+
+    it('remove specific handler', function() {
+        var foo = no.extend( {}, no.Events );
+        var count = 0;
+        var handler = function() { count++; };
+
+        foo.on('foo', handler);
+        foo.trigger('foo');
+        foo.off('foo', handler);
+        foo.trigger('foo');
+
+        expect(count).to.be(1);
+    });
+
+    it('remove all handlers of specific type');
+
+    it('remove all event handles');
+
+});
