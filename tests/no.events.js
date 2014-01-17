@@ -91,6 +91,23 @@ describe('off', function() {
         expect(calls).to.be('ab');
     });
 
-    it('remove all event handles');
+    it('remove all event handles', function() {
+        var foo = no.extend( {}, no.Events );
+        var calls = '';
+
+        foo.on('foo', function() { calls += 'a'; });
+        foo.on('bar', function() { calls += 'b'; });
+
+        foo.trigger('foo');
+        expect(calls).to.be('a');
+
+        foo.trigger('bar');
+        expect(calls).to.be('ab');
+
+        foo.off();
+        foo.trigger('foo');
+        foo.trigger('bar');
+        expect(calls).to.be('ab');
+    });
 
 });
