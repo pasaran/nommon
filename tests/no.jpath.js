@@ -160,84 +160,84 @@ describe('jpath with guard', function() {
 
 describe('compare nodeset to nodeset', function() {
 
-    it('.item.id == .ids1', function() {
-        expect( no.jpath('.item.id == .ids1', data) ).be.ok;
+    it('.item.id ~~ .ids1', function() {
+        expect( no.jpath('.item.id ~~ .ids1', data) ).be.ok;
     });
 
-    it('.item.id != .ids1', function() {
-        expect( no.jpath('.item.id != .ids1', data) ).not.be.ok;
+    it('.item.id !~ .ids1', function() {
+        expect( no.jpath('.item.id !~ .ids1', data) ).not.be.ok;
     });
 
-    it('.item.id == .ids2', function() {
-        expect( no.jpath('.item.id == .ids2', data) ).not.be.ok;
+    it('.item.id ~~ .ids2', function() {
+        expect( no.jpath('.item.id ~~ .ids2', data) ).not.be.ok;
     });
 
     it('.item.id != .ids2', function() {
-        expect( no.jpath('.item.id != .ids2', data) ).be.ok;
+        expect( no.jpath('.item.id !~ .ids2', data) ).be.ok;
     });
 
-    it('.item.id == .ids3', function() {
-        expect( no.jpath('.item.id == .ids3', data) ).be.ok;
+    it('.item.id ~~ .ids3', function() {
+        expect( no.jpath('.item.id ~~ .ids3', data) ).be.ok;
     });
 
-    it('.item.id != .ids3', function() {
-        expect( no.jpath('.item.id != .ids3', data) ).not.be.ok;
+    it('.item.id !~ .ids3', function() {
+        expect( no.jpath('.item.id !~ .ids3', data) ).not.be.ok;
     });
 
-    it('.item[ .id == /.ids1 ]', function() {
-        expect( no.jpath('.item[ .id == /.ids1 ].id', data) ).to.eql( [ 'two', 'three', 'five' ] );
+    it('.item[ .id ~~ /.ids1 ].id', function() {
+        expect( no.jpath('.item[ .id ~~ /.ids1 ].id', data) ).to.eql( [ 'two', 'three', 'five' ] );
     });
 
-    it('.item[ .id == /.ids2 ]', function() {
-        expect( no.jpath('.item[ .id == /.ids2 ].id', data) ).to.be(undefined);
+    it('.item[ .id ~~ /.ids2 ].id', function() {
+        expect( no.jpath('.item[ .id ~~ /.ids2 ].id', data) ).to.be.empty();
     });
 
-    it('.item[ .id == /.ids3 ]', function() {
-        expect( no.jpath('.item[ .id == /.ids3 ].id', data) ).to.eql( [ 'one' ] );
+    it('.item[ .id ~~ /.ids3 ].id', function() {
+        expect( no.jpath('.item[ .id ~~ /.ids3 ].id', data) ).to.eql( [ 'one' ] );
     });
 
-    it('.count == .a.b', function() {
-        expect( no.jpath('.count == .a.b', data) ).be.ok;
+    it('.count ~~ .a.b', function() {
+        expect( no.jpath('.count ~~ .a.b', data) ).be.ok;
     });
 
-    it('.count == .p.q', function() {
-        expect( no.jpath('.count == .p.q', data) ).not.be.ok;
+    it('.count ~~ .p.q', function() {
+        expect( no.jpath('.count ~~ .p.q', data) ).not.be.ok;
     });
 
-    it('.a.*[ . == /.p.* ]', function() {
-        expect( no.jpath('.a.*[ . == /.p.* ]', data) ).to.eql( [ 24, 66 ] );
+    it('.a.*[ . ~~ /.p.* ]', function() {
+        expect( no.jpath('.a.*[ . ~~ /.p.* ]', data) ).to.eql( [ 24, 66 ] );
     });
 
-    it('.item[ .count == /.a.* ].id', function() {
-        expect( no.jpath('.item[ .count == /.a.* ].id', data) ).to.eql( [ 'one', 'five' ] );
+    it('.item[ .count ~~ /.a.* ].id', function() {
+        expect( no.jpath('.item[ .count ~~ /.a.* ].id', data) ).to.eql( [ 'one', 'five' ] );
     });
 
-    it('.item[ .id == /.id ].id', function() {
-        expect( no.jpath('.item[ .id == /.id ].id', data) ).to.eql( [ 'two' ] );
+    it('.item[ .id ~~ /.id ].id', function() {
+        expect( no.jpath('.item[ .id ~~ /.id ].id', data) ).to.eql( [ 'two' ] );
     });
 
-    it('.ids1 == .ids2', function() {
-        expect( no.jpath('.ids1 == .ids2', data) ).not.be.ok;
+    it('.ids1 ~~ .ids2', function() {
+        expect( no.jpath('.ids1 ~~ .ids2', data) ).not.be.ok;
     });
 
-    it('.ids2 == .ids3', function() {
-        expect( no.jpath('.ids2 == .ids3', data) ).be.ok;
+    it('.ids2 ~~ .ids3', function() {
+        expect( no.jpath('.ids2 ~~ .ids3', data) ).be.ok;
     });
 
-    it('.ids1 == "two"', function() {
-        expect( no.jpath('.ids1 == "two"', data) ).be.ok;
+    it('.ids1 ~~ "two"', function() {
+        expect( no.jpath('.ids1 ~~ "two"', data) ).be.ok;
     });
 
-    it('.ids1 != "two"', function() {
-        expect( no.jpath('.ids1 != "two"', data) ).not.be.ok;
+    it('.ids1 !~ "two"', function() {
+        expect( no.jpath('.ids1 !~ "two"', data) ).not.be.ok;
     });
 
-    it('.ids1 == "one"', function() {
-        expect( no.jpath('.ids1 == "one"', data) ).not.be.ok;
+    it('.ids1 ~~ "one"', function() {
+        expect( no.jpath('.ids1 ~~ "one"', data) ).not.be.ok;
     });
 
-    it('.ids1 != "one"', function() {
-        expect( no.jpath('.ids1 != "one"', data) ).be.ok;
+    it('.ids1 !~ "one"', function() {
+        expect( no.jpath('.ids1 !~ "one"', data) ).be.ok;
     });
 
 });
@@ -246,40 +246,40 @@ describe('compare nodeset to nodeset', function() {
 
 describe('compare nodeset to scalar', function() {
 
-    it('.item.count == 42', function() {
-        expect( no.jpath('.item.count == 42', data) ).be.ok;
+    it('.item.count ~~ 42', function() {
+        expect( no.jpath('.item.count ~~ 42', data) ).be.ok;
     });
 
-    it('.item.count != 42', function() {
-        expect( no.jpath('.item.count != 42', data) ).not.be.ok;
+    it('.item.count !~ 42', function() {
+        expect( no.jpath('.item.count !~ 42', data) ).not.be.ok;
     });
 
-    it('.item.count == 84', function() {
-        expect( no.jpath('.item.count == 84', data) ).not.be.ok;
+    it('.item.count ~~ 84', function() {
+        expect( no.jpath('.item.count ~~ 84', data) ).not.be.ok;
     });
 
-    it('.item.count != 84', function() {
-        expect( no.jpath('.item.count != 84', data) ).be.ok;
+    it('.item.count !~ 84', function() {
+        expect( no.jpath('.item.count !~ 84', data) ).be.ok;
     });
 
-    it('.item.id == "two"', function() {
-        expect( no.jpath('.item.id == "two"', data) ).be.ok;
+    it('.item.id ~~ "two"', function() {
+        expect( no.jpath('.item.id ~~ "two"', data) ).be.ok;
     });
 
-    it('.item.id != "two"', function() {
-        expect( no.jpath('.item.id != "two"', data) ).not.be.ok;
+    it('.item.id !~ "two"', function() {
+        expect( no.jpath('.item.id !~ "two"', data) ).not.be.ok;
     });
 
-    it('.item[ .id == "two" ]', function() {
-        expect( no.jpath('.item[ .id == "two" ].id', data) ).to.eql( [ 'two' ] );
+    it('.item[ .id ~~ "two" ]', function() {
+        expect( no.jpath('.item[ .id ~~ "two" ].id', data) ).to.eql( [ 'two' ] );
     });
 
-    it('.item[ .id != "two" ]', function() {
-        expect( no.jpath('.item[ .id != "two" ].id', data) ).to.eql( [ 'one', 'three', 'four', 'five' ] );
+    it('.item[ .id !~ "two" ]', function() {
+        expect( no.jpath('.item[ .id !~ "two" ].id', data) ).to.eql( [ 'one', 'three', 'four', 'five' ] );
     });
 
-    it('.item[ .id != "" ]', function() {
-        expect( no.jpath('.item[ .id != "" ].id', data) ).to.eql( [ 'one', 'two', 'three', 'four', 'five' ] );
+    it('.item[ .id !~ "" ]', function() {
+        expect( no.jpath('.item[ .id !~ "" ].id', data) ).to.eql( [ 'one', 'two', 'three', 'four', 'five' ] );
     });
 
 });
