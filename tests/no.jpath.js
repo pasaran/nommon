@@ -121,7 +121,7 @@ describe('variables', function() {
     });
 
     it('.item[ index ].id', function() {
-        expect( no.jpath('.item[ index ].id', data, { index: 2 }) ).to.eql( [ 'three' ] );
+        expect( no.jpath('.item[ index ].id', data, { index: 2 }) ).to.eql( 'three' );
     });
 
     it('index', function() {
