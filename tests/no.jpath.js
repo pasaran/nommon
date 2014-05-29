@@ -103,11 +103,11 @@ describe('root or self with predicate', function() {
 describe('jpath with index', function() {
 
     it('.item[2].id', function() {
-        expect( no.jpath('.item[2].id', data) ).to.eql( [ 'three' ] );
+        expect( no.jpath('.item[2].id', data) ).to.eql( 'three' );
     });
 
     it('.item[ /.index ].id', function() {
-        expect( no.jpath('.item[ /.index ].id', data) ).to.eql( [ 'three' ] );
+        expect( no.jpath('.item[ /.index ].id', data) ).to.eql( 'three' );
     });
 
 });
