@@ -567,15 +567,16 @@ describe('funcs', function() {
         text: 'Привет'
     };
 
-    var funcs = {
-        encode: function(s) {
+    no.jpath.defunc( 'encode', {
+        type: 'string',
+        body: function(s) {
             return encodeURIComponent(s);
         }
-    };
+    } );
 
     it('encode', function() {
         expect(
-            no.jpath('"http://yandex.ru/yandsearch?text={ encode(.text) }"', data, null, funcs)
+            no.jpath('"http://yandex.ru/yandsearch?text={ encode(.text) }"', data)
         ).to.eql('http://yandex.ru/yandsearch?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82')
     });
 
