@@ -569,7 +569,7 @@ describe('funcs', function() {
     };
 
     no.jpath.defunc( 'encode', {
-        type: 'string',
+        scheme: 'string',
         body: function(s) {
             return encodeURIComponent(s);
         }
