@@ -136,22 +136,23 @@ describe('variables', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
-describe('jpath with guard', function() {
+describe('jpath with "guard"', function() {
+    //  There are no guards anymore, but you can use "guard"-expression with &&.
 
-    it('.item[ .selected ][ /.id == "two" ].id', function() {
-        expect( no.jpath('.item[ .selected ][ /.id == "two" ].id', data) ).to.eql( [ 'two', 'four' ] );
+    it('( /.id == "two" ) && .item[ .selected ].id', function() {
+        expect( no.jpath('( /.id == "two" ) && .item[ .selected ].id', data) ).to.eql( [ 'two', 'four' ] );
     });
 
-    it('.item[ /.id != "two" ].id', function() {
-        expect( no.jpath('.item[ .selected ][ /.id != "two" ].id', data) ).to.be(undefined);
+    it('( /.id != "two" ) && .item.id', function() {
+        expect( no.jpath('( /.id != "two" ) && .item.id', data) ).to.eql(false);
     });
 
-    it('.item[ /.id == "two" ][ .selected ].id', function() {
-        expect( no.jpath('.item[ /.id == "two" ][ .selected ].id', data) ).to.eql( [ 'two', 'four' ] );
+    it('( /.id == "two" ) && .item[ .selected ].id', function() {
+        expect( no.jpath('( /.id == "two" ) && .item[ .selected ].id', data) ).to.eql( [ 'two', 'four' ] );
     });
 
-    it('.item[ /.id != "two" ][ .selected ].id', function() {
-        expect( no.jpath('.item[ /.id != "two" ][ .selected ].id', data) ).to.be(undefined);
+    it('( /.id != "two" ) && .item[ .selected ].id', function() {
+        expect( no.jpath('( /.id != "two" ) && .item[ .selected ].id', data) ).to.eql(false);
     });
 
 });
