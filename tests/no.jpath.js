@@ -736,6 +736,29 @@ describe('nested arrays', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
+describe('jpath methods', function() {
+    var scheme = no.scheme( {
+        foo: {
+            bar: 'string'
+        }
+    } );
+
+    var jpath = no.jpath.compile( '.foo.bar.substr(7,6)', 'expr', scheme );
+
+    var data = {
+        foo: {
+            bar: 'Hello, World!'
+        }
+    };
+
+    it('.foo.bar.substr(7,6)', function() {
+        expect( jpath( data ) ).to.eql( 'World!' );
+    } );
+
+});
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
 /*
 describe('jresults', function() {
 
