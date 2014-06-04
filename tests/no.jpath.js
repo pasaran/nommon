@@ -759,6 +759,24 @@ describe('jpath methods', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
+describe( 'jref', function() {
+    var data = {
+        foo: 4,
+        bar: 5
+    };
+
+    no.jpath.add( 'foo', '.foo' );
+    no.jpath.add( 'bar', '.bar' );
+
+    var jpath = no.jpath.expr( '&foo + &bar' );
+
+    it( '&foo + &bar', function() {
+        expect( jpath( data ) ).to.eql( 9 );
+    } );
+} );
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
 /*
 describe('jresults', function() {
 
