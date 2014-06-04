@@ -743,7 +743,7 @@ describe('jpath methods', function() {
         }
     } );
 
-    var jpath = no.jpath.compile( '.foo.bar.substr(7,6)', 'expr', scheme );
+    var jpath = no.jpath.expr( '.foo.bar.substr(7,6)', scheme );
 
     var data = {
         foo: {
