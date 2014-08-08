@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.31
+
+  * Метод `no.object.is_empty()`.
+
 ## 0.0.30
 
   * Вернулся в строй модуль `no.future.js`.
