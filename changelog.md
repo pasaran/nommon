@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.32
+
+  * Методы `no.array.uniq`, `no.array.union`.
+  * `no.Watcher`.
+
 ## 0.0.31
 
   * Метод `no.object.is_empty()`.
