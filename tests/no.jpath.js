@@ -585,7 +585,6 @@ describe('funcs', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
-/*
 describe('jresult', function() {
 
     var data = {
@@ -632,7 +631,6 @@ describe('jresult', function() {
     });
 
 });
-*/
 
 describe('escape symbols', function() {
 
@@ -777,7 +775,6 @@ describe( 'jref', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
-/*
 describe('jresults', function() {
 
     it('simple object', function() {
@@ -791,34 +788,6 @@ describe('jresults', function() {
     });
 
 });
-*/
-
-//  ---------------------------------------------------------------------------------------------------------------  //
-
-/*
-describe('no.jpath.set', function() {
-
-    it('test #1', function() {
-        var data = {};
-        expect( no.jpath.set('.foo', data, 42) ).to.eql( { foo: 42 } );
-        expect( no.jpath.set('.bar', data, 24) ).to.eql( { foo: 42, bar: 24 } );
-        expect( no.jpath.set('.foo', data, 66) ).to.eql( { foo: 66, bar: 24 } );
-        expect( no.jpath.set('.foo.bar', data, 37) ).to.eql( { foo: 66, bar: 24 } );
-    });
-
-    it('test #2', function() {
-        var data = {};
-        expect( no.jpath.set('.foo.bar.qoo', data, 42) ).to.eql( { foo: { bar: { qoo: 42 } } } );
-        expect( no.jpath.set('.foo.bar', data, 42) ).to.eql( { foo: { bar: 42 } } );
-    });
-
-    it('test #3', function() {
-        var data = { foo: null };
-        expect( no.jpath.set('.foo.bar', data, 42) ).to.eql( { foo: { bar: 42 } } );
-    });
-
-});
-*/
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
