@@ -3,6 +3,9 @@ tests:
 	node_modules/.bin/mocha tests/no.events.js
 	node_modules/.bin/mocha tests/no.watcher.js
 
+jshint:
+	jshint lib/*.js
+
 build:
 	uglifyjs lib/no.jpath.js > lib/no.jpath.min.js
 

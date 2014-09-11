@@ -1,5 +1,9 @@
 # Changelog
 
+## ?.?.??
+
+  * **Важно!** Смена движка `jpath`-ов.
+
 ## 0.0.32
 
   * Методы `no.array.uniq`, `no.array.union`.
