@@ -22,6 +22,7 @@
     "main": "lib/index.js",
     "files": [
         "lib/index.js",
+        "lib/no.js",
         "lib/no.*.js"
     ],
     "scripts": {
