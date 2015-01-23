@@ -12,5 +12,5 @@ build:
 clean:
 	rm lib/no.*.min.js
 
-.PHONY: tests
+.PHONY: tests jshint build clean
 
