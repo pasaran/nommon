@@ -68,32 +68,32 @@ describe('simple jpath', function() {
 
 describe('jpath with predicate', function() {
 
-    it('.item[ .selected ].id', function() {
-        expect( no.jpath('.item[ .selected ].id', data) ).to.eql( [ 'two', 'four' ] );
+    it('.item{ .selected }.id', function() {
+        expect( no.jpath('.item{ .selected }.id', data) ).to.eql( [ 'two', 'four' ] );
     });
 
-    it('.item[ .count > 20 ].id', function() {
-        expect( no.jpath('.item[ .count > 20 ].id', data) ).to.eql( [ 'one', 'four', 'five' ] );
+    it('.item{ .count > 20 }.id', function() {
+        expect( no.jpath('.item{ .count > 20 }.id', data) ).to.eql( [ 'one', 'four', 'five' ] );
     });
 
 });
 
 describe('root or self with predicate', function() {
 
-    it('.[ .count > 0 ].count', function() {
-        expect( no.jpath('.[ .count > 0 ].count', data) ).to.be(42);
+    it('.{ .count > 0 }.count', function() {
+        expect( no.jpath('.{ .count > 0 }.count', data) ).to.be(42);
     });
 
-    it('.[ .count < 0 ].count', function() {
-        expect( no.jpath('.[ .count < 0 ].count', data) ).to.be(undefined);
+    it('.{ .count < 0 }.count', function() {
+        expect( no.jpath('.{ .count < 0 }.count', data) ).to.be(undefined);
     });
 
-    it('/[ .count > 0 ].count', function() {
-        expect( no.jpath('/[ .count > 0 ].count', data) ).to.be(42);
+    it('/{ .count > 0 }.count', function() {
+        expect( no.jpath('/{ .count > 0 }.count', data) ).to.be(42);
     });
 
-    it('/[ .count < 0 ].count', function() {
-        expect( no.jpath('/[ .count < 0 ].count', data) ).to.be(undefined);
+    it('/{ .count < 0 }.count', function() {
+        expect( no.jpath('/{.count < 0 }.count', data) ).to.be(undefined);
     });
 
 });
@@ -102,8 +102,8 @@ describe('root or self with predicate', function() {
 
 describe('jpath with index', function() {
 
-    it('.item[2].id', function() {
-        expect( no.jpath('.item[2].id', data) ).to.eql( 'three' );
+    it('.item[ 2 ].id', function() {
+        expect( no.jpath('.item[ 2 ].id', data) ).to.eql( 'three' );
     });
 
     it('.item[ /.index ].id', function() {
@@ -139,20 +139,20 @@ describe('variables', function() {
 describe('jpath with "guard"', function() {
     //  There are no guards anymore, but you can use "guard"-expression with &&.
 
-    it('( /.id == "two" ) && .item[ .selected ].id', function() {
-        expect( no.jpath('( /.id == "two" ) && .item[ .selected ].id', data) ).to.eql( [ 'two', 'four' ] );
+    it('( /.id == "two" ) && .item{ .selected }.id', function() {
+        expect( no.jpath('( /.id == "two" ) && .item{ .selected }.id', data) ).to.eql( [ 'two', 'four' ] );
     });
 
     it('( /.id != "two" ) && .item.id', function() {
         expect( no.jpath('( /.id != "two" ) && .item.id', data) ).to.eql(false);
     });
 
-    it('( /.id == "two" ) && .item[ .selected ].id', function() {
-        expect( no.jpath('( /.id == "two" ) && .item[ .selected ].id', data) ).to.eql( [ 'two', 'four' ] );
+    it('( /.id == "two" ) && .item{ .selected }.id', function() {
+        expect( no.jpath('( /.id == "two" ) && .item{ .selected }.id', data) ).to.eql( [ 'two', 'four' ] );
     });
 
-    it('( /.id != "two" ) && .item[ .selected ].id', function() {
-        expect( no.jpath('( /.id != "two" ) && .item[ .selected ].id', data) ).to.eql(false);
+    it('( /.id != "two" ) && .item{ .selected }.id', function() {
+        expect( no.jpath('( /.id != "two" ) && .item{ .selected }.id', data) ).to.eql(false);
     });
 
 });
@@ -185,16 +185,16 @@ describe('compare nodeset to nodeset', function() {
         expect( no.jpath('.item.id !~ .ids3', data) ).not.be.ok;
     });
 
-    it('.item[ .id ~~ /.ids1 ].id', function() {
-        expect( no.jpath('.item[ .id ~~ /.ids1 ].id', data) ).to.eql( [ 'two', 'three', 'five' ] );
+    it('.item{ .id ~~ /.ids1 }.id', function() {
+        expect( no.jpath('.item{ .id ~~ /.ids1 }.id', data) ).to.eql( [ 'two', 'three', 'five' ] );
     });
 
-    it('.item[ .id ~~ /.ids2 ].id', function() {
-        expect( no.jpath('.item[ .id ~~ /.ids2 ].id', data) ).to.be.empty();
+    it('.item{ .id ~~ /.ids2 }.id', function() {
+        expect( no.jpath('.item{ .id ~~ /.ids2 }.id', data) ).to.be.empty();
     });
 
-    it('.item[ .id ~~ /.ids3 ].id', function() {
-        expect( no.jpath('.item[ .id ~~ /.ids3 ].id', data) ).to.eql( [ 'one' ] );
+    it('.item{ .id ~~ /.ids3 }.id', function() {
+        expect( no.jpath('.item{ .id ~~ /.ids3 }.id', data) ).to.eql( [ 'one' ] );
     });
 
     it('.count ~~ .a.b', function() {
@@ -205,16 +205,16 @@ describe('compare nodeset to nodeset', function() {
         expect( no.jpath('.count ~~ .p.q', data) ).not.be.ok;
     });
 
-    it('.a.*[ . ~~ /.p.* ]', function() {
-        expect( no.jpath('.a.*[ . ~~ /.p.* ]', data) ).to.eql( [ 24, 66 ] );
+    it('.a.*{ . ~~ /.p.* }', function() {
+        expect( no.jpath('.a.*{ . ~~ /.p.* }', data) ).to.eql( [ 24, 66 ] );
     });
 
-    it('.item[ .count ~~ /.a.* ].id', function() {
-        expect( no.jpath('.item[ .count ~~ /.a.* ].id', data) ).to.eql( [ 'one', 'five' ] );
+    it('.item{ .count ~~ /.a.* }.id', function() {
+        expect( no.jpath('.item{ .count ~~ /.a.* }.id', data) ).to.eql( [ 'one', 'five' ] );
     });
 
-    it('.item[ .id ~~ /.id ].id', function() {
-        expect( no.jpath('.item[ .id ~~ /.id ].id', data) ).to.eql( [ 'two' ] );
+    it('.item{ .id ~~ /.id }.id', function() {
+        expect( no.jpath('.item{ .id ~~ /.id }.id', data) ).to.eql( [ 'two' ] );
     });
 
     it('.ids1 ~~ .ids2', function() {
@@ -271,16 +271,16 @@ describe('compare nodeset to scalar', function() {
         expect( no.jpath('.item.id !~ "two"', data) ).not.be.ok;
     });
 
-    it('.item[ .id ~~ "two" ]', function() {
-        expect( no.jpath('.item[ .id ~~ "two" ].id', data) ).to.eql( [ 'two' ] );
+    it('.item{ .id ~~ "two" }', function() {
+        expect( no.jpath('.item{ .id ~~ "two" }.id', data) ).to.eql( [ 'two' ] );
     });
 
-    it('.item[ .id !~ "two" ]', function() {
-        expect( no.jpath('.item[ .id !~ "two" ].id', data) ).to.eql( [ 'one', 'three', 'four', 'five' ] );
+    it('.item{ .id !~ "two" }', function() {
+        expect( no.jpath('.item{ .id !~ "two" }.id', data) ).to.eql( [ 'one', 'three', 'four', 'five' ] );
     });
 
-    it('.item[ .id !~ "" ]', function() {
-        expect( no.jpath('.item[ .id !~ "" ].id', data) ).to.eql( [ 'one', 'two', 'three', 'four', 'five' ] );
+    it('.item{ .id !~ "" }', function() {
+        expect( no.jpath('.item{ .id !~ "" }.id', data) ).to.eql( [ 'one', 'two', 'three', 'four', 'five' ] );
     });
 
 });
@@ -428,39 +428,39 @@ describe('falsy jpaths', function() {
     };
 
     it('true', function() {
-        expect( no.jpath('.foo[ .a ].c', data) ).to.be(42);
+        expect( no.jpath('.foo{ .a }.c', data) ).to.be(42);
     });
 
     it('non-empty string', function() {
-        expect( no.jpath('.foo[ .b ].c', data) ).to.be(42);
+        expect( no.jpath('.foo{ .b }.c', data) ).to.be(42);
     });
 
     it('non-zero number', function() {
-        expect( no.jpath('.foo[ .c ].c', data) ).to.be(42);
+        expect( no.jpath('.foo{ .c }.c', data) ).to.be(42);
     });
 
     it('empty string', function() {
-        expect( no.jpath('.foo[ .d ].c', data) ).to.be(undefined);
+        expect( no.jpath('.foo{ .d }.c', data) ).to.be(undefined);
     });
 
     it('zero', function() {
-        expect( no.jpath('.foo[ .e ].c', data) ).to.be(undefined);
+        expect( no.jpath('.foo{ .e }.c', data) ).to.be(undefined);
     });
 
     it('null', function() {
-        expect( no.jpath('.foo[ .f ].c', data) ).to.be(undefined);
+        expect( no.jpath('.foo{ .f }.c', data) ).to.be(undefined);
     });
 
     it('false', function() {
-        expect( no.jpath('.foo[ .g ].c', data) ).to.be(undefined);
+        expect( no.jpath('.foo{ .g }.c', data) ).to.be(undefined);
     });
 
     it('undefined', function() {
-        expect( no.jpath('.foo[ .h ].c', data) ).to.be(undefined);
+        expect( no.jpath('.foo{ .h }.c', data) ).to.be(undefined);
     });
 
     it('non-existence key', function() {
-        expect( no.jpath('.foo[ .z ].c', data) ).to.be(undefined);
+        expect( no.jpath('.foo{ .z }.c', data) ).to.be(undefined);
     });
 
 });
@@ -534,20 +534,20 @@ describe('string interpolation', function() {
         expect( no.jpath('"{ .a }{ .b }{ .c }"', data) ).to.be('hello');
     });
 
-    it('.foo.bar[ . == "hello" ]', function() {
-        expect( no.jpath('.foo.bar[ . == "hello" ]', data) ).to.be('hello');
+    it('.foo.bar{ . == "hello" }', function() {
+        expect( no.jpath('.foo.bar{ . == "hello" }', data) ).to.be('hello');
     });
 
-    it('.foo.bar[ . == "{ /.a }llo" ]', function() {
-        expect( no.jpath('.foo.bar[ . == "{ /.a }llo" ]', data) ).to.be('hello');
+    it('.foo.bar{ . == "{ /.a }llo" }', function() {
+        expect( no.jpath('.foo.bar{ . == "{ /.a }llo" }', data) ).to.be('hello');
     });
 
-    it('.foo.bar[ . == "{ /.a }ll{ /.c }" ]', function() {
-        expect( no.jpath('.foo.bar[ . == "{ /.a }ll{ /.c }" ]', data) ).to.be('hello');
+    it('.foo.bar{ . == "{ /.a }ll{ /.c }" }', function() {
+        expect( no.jpath('.foo.bar{ . == "{ /.a }ll{ /.c }" }', data) ).to.be('hello');
     });
 
-    it('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', function() {
-        expect( no.jpath('.foo.bar[ . == "{ /.a }{ /.b }{ /.c }" ]', data) ).to.be('hello');
+    it('.foo.bar{ . == "{ /.a }{ /.b }{ /.c }" }', function() {
+        expect( no.jpath('.foo.bar{ . == "{ /.a }{ /.b }{ /.c }" }', data) ).to.be('hello');
     });
 
     it('"{ .foo }"', function() {
@@ -607,7 +607,7 @@ describe('jresult', function() {
 
     it('jresult #1', function() {
         expect( no.jpath({
-            selected: '.item[ .selected ]'
+            selected: '.item{ .selected }'
         }, data) ).to.eql({
             selected: [
                 { id: 'two', count: 13, selected: true },
@@ -639,7 +639,7 @@ describe('escape symbols', function() {
         bar: '\\hello\\'
     };
 
-    it('foo-{{ bar }}', function() {
+    it('"foo-{{ bar }}"', function() {
         expect( no.jpath('"foo-{{ bar }}"') ).to.be('foo-{ bar }');
     });
 
@@ -647,16 +647,16 @@ describe('escape symbols', function() {
         expect( no.jpath.string('foo-{{ bar }}')() ).to.be('foo-{ bar }');
     });
 
-    it('.foo[ . == "\\\"hello\\\"" ]', function() {
-        expect( no.jpath('.foo[ . == "\\\"hello\\\"" ]', data) ).to.be('"hello"');
+    it('.foo{ . == "\\\"hello\\\"" }', function() {
+        expect( no.jpath('.foo{ . == "\\\"hello\\\"" }', data) ).to.be('"hello"');
     });
 
-    it('.foo[ . == "\\"hello\\"" ]', function() {
-        expect( no.jpath('.foo[ . == "\\"hello\\"" ]', data) ).to.be('"hello"');
+    it('.foo{ . == "\\"hello\\"" }', function() {
+        expect( no.jpath('.foo{ . == "\\"hello\\"" }', data) ).to.be('"hello"');
     });
 
-    it('.foo[ . == "\\hello\\" ]', function() {
-        expect( no.jpath('.bar[ . == "\\hello\\\\" ]', data) ).to.be('\\hello\\');
+    it('.foo{ . == "\\hello\\" }', function() {
+        expect( no.jpath('.bar{ . == "\\hello\\\\" }', data) ).to.be('\\hello\\');
     });
 
 });
@@ -735,7 +735,7 @@ describe('nested arrays', function() {
 //  ---------------------------------------------------------------------------------------------------------------  //
 
 describe('jpath methods', function() {
-    var scheme = no.scheme( {
+    var scheme = no.type( {
         foo: {
             bar: 'string'
         }
