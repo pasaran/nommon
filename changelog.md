@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.35
+
+  * Немного локализации в `no.date.js`.
+
 ## 0.0.34
 
   * В `package.json` забыт файл `lib/no.js`.
