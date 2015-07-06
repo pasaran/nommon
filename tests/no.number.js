@@ -11,6 +11,12 @@ describe( 'no.number.format', function() {
         expect( no.number.format( 1.3579, 2 ) ).to.be( '1.36' );
         expect( no.number.format( 1.3579, 3 ) ).to.be( '1.358' );
 
+        expect( no.number.format( 100.12, 0 ) ).to.be( '100' );
+        expect( no.number.format( 100.89, 0 ) ).to.be( '101' );
+        //  По сути `no.number.format( n, null ) === n.toString()`.
+        expect( no.number.format( 100.12, null ) ).to.be( '100.12' );
+        expect( no.number.format( 100.89, null ) ).to.be( '100.89' );
+
         expect( no.number.format( 1.3579, null, null, ',' ) ).to.be( '1,3579' );
 
         expect( no.number.format( 100, null, ' ' ) ).to.be( '100' );
