@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.36
+
+  * `no.string.group_sep`.
+  * `no.number.format`.
+
 ## 0.0.35
 
   * Немного локализации в `no.date.js`.
