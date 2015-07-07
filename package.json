@@ -6,7 +6,7 @@
     },
     "name": "nommon",
     "description": "nop's common",
-    "version": "0.0.36",
+    "version": "0.0.37",
     "homepage": "https://github.com/pasaran/nommon",
     "repository": {
         "type": "git",

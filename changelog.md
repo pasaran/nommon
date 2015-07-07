@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.37
+
+  * В `lib/index.js` добавлен забытый `require( './no.number.js' );`.
+
 ## 0.0.36
 
   * `no.string.group_sep`.
