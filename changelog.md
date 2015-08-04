@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.38
+
+  * Фикс в `no.number.format`. Проверяем, что передали число.
+
 ## 0.0.37
 
   * В `lib/index.js` добавлен забытый `require( './no.number.js' );`.
