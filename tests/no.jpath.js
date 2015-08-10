@@ -2,6 +2,13 @@ var no = require('../lib/no.jpath.js');
 
 var expect = require('expect.js');
 
+var _it = it;
+it = function( id, callback ) {
+    _it( id, function() {
+        callback( id );
+    } );
+};
+
 //  ---------------------------------------------------------------------------------------------------------------  //
 
 var data = {
@@ -516,6 +523,48 @@ describe('short-circuit evaluation', function() {
     });
 
 });
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
+describe( 'ternary operator', function() {
+
+    var data = {
+        foo: 42,
+        bar: 24,
+        quu: 94,
+        tee: 26,
+        doo: 37
+    };
+
+    it( '.foo > 40 ? .bar : .quu', function( id ) {
+        expect( no.jpath( id, data ) ).to.be( 24 );
+    } );
+
+    it( '.foo > 40 ? .bar : .quu', function( id ) {
+        expect( no.jpath( id, data ) ).to.be( 24 );
+    } );
+
+    it( '( .foo > 40 ) ? .bar : .quu', function( id ) {
+        expect( no.jpath( id, data ) ).to.be( 24 );
+    } );
+
+    it( '.foo > 40 ? "bar" : 42', function( id ) {
+        expect( no.jpath( id, data ) ).to.be( "bar" );
+    } );
+
+    it( '.foo ? .bar ? .quu : .tee : .doo', function( id ) {
+        expect( no.jpath( id, data ) ).to.be( 94 );
+    } );
+
+    it( '!.foo ? .bar ? .quu : .tee : .doo', function( id ) {
+        expect( no.jpath( id, data ) ).to.be( 37 );
+    } );
+
+    it( '.foo ? !.bar ? .quu : .tee : .doo', function( id ) {
+        expect( no.jpath( id, data ) ).to.be( 26 );
+    } );
+
+} );
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
