@@ -34,7 +34,7 @@ describe('async', function() {
         foo.atrigger('foo', 42);
         expect(result).to.be(undefined);
 
-        no.next(function() {
+        no.next_tick(function() {
             expect(result).to.be(42);
             done();
         });
@@ -50,7 +50,7 @@ describe('async', function() {
         });
         expect(result).to.be(undefined);
 
-        no.next(function() {
+        no.next_tick(function() {
             expect(result).to.be(42);
             done();
         });
