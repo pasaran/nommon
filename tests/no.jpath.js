@@ -430,7 +430,10 @@ describe('falsy jpaths', function() {
             e: 0,
             f: null,
             g: false,
-            h: undefined
+            h: undefined,
+            arr: [
+                { nullValue: null }
+            ]
         }
     };
 
@@ -468,6 +471,14 @@ describe('falsy jpaths', function() {
 
     it('non-existence key', function() {
         expect( no.jpath('.foo{ .z }.c', data) ).to.be(undefined);
+    });
+
+    it('walk through null value', function() {
+        expect( no.jpath('.foo.f.id', data) ).to.be(undefined);
+    });
+
+    it('walk through null value in array', function() {
+        expect( no.jpath('.foo.arr.nullValue.id', data) ).to.be.eql([]);
     });
 
 });
