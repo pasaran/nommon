@@ -430,10 +430,7 @@ describe('falsy jpaths', function() {
             e: 0,
             f: null,
             g: false,
-            h: undefined,
-            arr: [
-                { nullValue: null }
-            ]
+            h: undefined
         }
     };
 
@@ -473,14 +470,55 @@ describe('falsy jpaths', function() {
         expect( no.jpath('.foo{ .z }.c', data) ).to.be(undefined);
     });
 
-    it('walk through null value', function() {
-        expect( no.jpath('.foo.f.id', data) ).to.be(undefined);
+});
+
+describe('walk through null', function() {
+
+    var data = {
+        foo: null,
+
+        bar: [
+            null
+        ],
+
+        quu: [
+            {
+                foo: null
+            }
+        ],
+
+        boo: {
+            foo: null
+        }
+    };
+
+    it('.foo', function() {
+        expect( no.jpath('.foo', data) ).to.be(null);
     });
 
-    it('walk through null value in array', function() {
-        expect( no.jpath('.foo.arr.nullValue.id', data) ).to.be.eql([]);
+    it('.foo.bar', function() {
+        expect( no.jpath('.foo.bar', data) ).to.be(undefined);
     });
 
+    it('.foo.bar.quu', function() {
+        expect( no.jpath('.foo.bar.quu', data) ).to.be(undefined);
+    });
+
+    it('.bar.foo', function() {
+        expect( no.jpath('.bar.foo', data) ).to.be.eql([]);
+    });
+
+    it('.bar.foo.quu', function() {
+        expect( no.jpath('.bar.foo.quu', data) ).to.be.eql([]);
+    });
+
+    it('.quu.foo.bar', function() {
+        expect( no.jpath('.bar.foo.quu', data) ).to.be.eql([]);
+    });
+
+    it('.boo.foo', function() {
+        expect( no.jpath('.bar.foo.quu', data) ).to.be(null);
+    });
 });
 
 //  ---------------------------------------------------------------------------------------------------------------  //
