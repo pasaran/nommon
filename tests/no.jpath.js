@@ -472,7 +472,7 @@ describe('falsy jpaths', function() {
 
 });
 
-describe('walk through null', function() {
+describe( 'walk through null', function() {
 
     var data = {
         foo: null,
@@ -492,34 +492,38 @@ describe('walk through null', function() {
         }
     };
 
-    it('.foo', function() {
-        expect( no.jpath('.foo', data) ).to.be(null);
-    });
+    it( '.foo', function( jpath ) {
+        expect( no.jpath( jpath, data ) ).to.be( null );
+    } );
 
-    it('.foo.bar', function() {
-        expect( no.jpath('.foo.bar', data) ).to.be(undefined);
-    });
+    it( '.bar', function( jpath ) {
+        expect( no.jpath( jpath, data ) ).to.be.eql( [ null ] );
+    } );
 
-    it('.foo.bar.quu', function() {
-        expect( no.jpath('.foo.bar.quu', data) ).to.be(undefined);
-    });
+    it( '.foo.bar', function( jpath ) {
+        expect( no.jpath( jpath, data ) ).to.be( undefined );
+    } );
 
-    it('.bar.foo', function() {
-        expect( no.jpath('.bar.foo', data) ).to.be.eql([]);
-    });
+    it( '.foo.bar.quu', function( jpath ) {
+        expect( no.jpath( jpath, data ) ).to.be( undefined );
+    } );
 
-    it('.bar.foo.quu', function() {
-        expect( no.jpath('.bar.foo.quu', data) ).to.be.eql([]);
-    });
+    it( '.bar.foo', function( jpath ) {
+        expect( no.jpath( jpath, data) ).to.be.eql( [] );
+    } );
 
-    it('.quu.foo.bar', function() {
-        expect( no.jpath('.bar.foo.quu', data) ).to.be.eql([]);
-    });
+    it( '.bar.foo.quu', function( jpath ) {
+        expect( no.jpath( jpath, data ) ).to.be.eql( [] );
+    } );
 
-    it('.boo.foo', function() {
-        expect( no.jpath('.bar.foo.quu', data) ).to.be(null);
-    });
-});
+    it( '.quu.foo.bar', function( jpath ) {
+        expect( no.jpath( jpath, data ) ).to.be.eql( [] );
+    } );
+
+    it( '.boo.foo.quu', function( jpath ) {
+        expect( no.jpath( jpath, data ) ).to.be( undefined );
+    } );
+} );
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
@@ -890,6 +894,35 @@ describe('jresults', function() {
     });
 
 });
+
+//  ---------------------------------------------------------------------------------------------------------------  //
+
+describe( 'types', function() {
+    var type = no.type( {
+        id: String,
+        items: [
+            {
+                id: String,
+                count: Number
+            }
+        ]
+    } );
+
+    var data = {
+        id: 'foo',
+        items: [
+            { id: 'one', count: 42 },
+            { id: 'two', count: 24 },
+            { id: 'three', count: 66 }
+        ]
+    };
+
+    it( '.items.count', function( jpath ) {
+        var jexpr = no.jpath.expr( jpath, type );
+
+        expect( jexpr( data ) ).to.be.eql( [ 42, 24, 66 ] );
+    } );
+} );
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
