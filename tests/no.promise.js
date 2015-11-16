@@ -188,7 +188,7 @@ describe( 'core features', function() {
         var p1 = no.promise();
         var p2 = no.promise();
 
-        no.promise.wait( [ p1, p2 ] )
+        no.promise.all( [ p1, p2 ] )
             .then( function( value ) {
                 expect( value ).to.be.eql( [ 42, 24 ] );
                 done();
@@ -206,7 +206,7 @@ describe( 'core features', function() {
         var p1 = no.promise();
         var p2 = no.promise();
 
-        no.promise.wait( [ p1, p2 ] )
+        no.promise.all( [ p1, p2 ] )
             .fail( function( value ) {
                 expect( value ).to.be.eql( 42 );
                 done();
@@ -224,7 +224,7 @@ describe( 'core features', function() {
         var p1 = no.promise();
         var p2 = no.promise();
 
-        no.promise.wait( { foo: p1, bar: p2 } )
+        no.promise.all( { foo: p1, bar: p2 } )
             .then( function( value ) {
                 expect( value ).to.be.eql( { foo: 42, bar: 24 } );
                 done();
@@ -242,7 +242,7 @@ describe( 'core features', function() {
         var p1 = no.promise();
         var p2 = no.promise();
 
-        no.promise.wait( { foo: p1, bar: p2 } )
+        no.promise.all( { foo: p1, bar: p2 } )
             .fail( function( value ) {
                 expect( value ).to.be.eql( 42 );
                 done();
@@ -254,6 +254,36 @@ describe( 'core features', function() {
         setTimeout( function() {
             p2.reject( 24 );
         }, 100 );
+    } );
+
+    it( 'then fail', function( done ) {
+        var p = no.promise();
+
+        p
+            .then( function( result ) {
+            } )
+            .fail( function( error ) {
+                expect( error ).to.be.eql( 42 );
+                done();
+            } );
+
+        p.reject( 42 );
+    } );
+
+    it( 'return error', function( done ) {
+        var p = no.promise();
+
+        p
+            .then( function() {
+                return no.error( 'foo' );
+            } )
+            .fail( function( error ) {
+                expect( no.is_error( error ) ).to.be.eql( true );
+                expect( error.error ).to.be.eql( 'foo' );
+                done();
+            } );
+
+        p.resolve();
     } );
 
 } );
