@@ -1,4 +1,4 @@
-var no = require( '../lib/no.promise.js' );
+var no = require( '../lib/index.js' );
 
 var expect = require( 'expect.js' );
 
@@ -284,6 +284,34 @@ describe( 'core features', function() {
             } );
 
         p.resolve();
+    } );
+
+    it( 'promise.all in next next tick', function( done ) {
+        var p1 = no.promise();
+        var p2 = no.promise();
+        var p = no.promise.all( [ p1, p2 ] );
+
+        p.then( function() {
+            foo = true;
+        } );
+
+        var foo = false;
+
+        p1.resolve( 42 );
+        p2.resolve( 24 );
+
+        expect( foo ).to.be( false );
+
+        no.next_tick( function() {
+            expect( p.is_resolved() ).to.be( true );
+            expect( foo ).to.be( false );
+
+            no.next_tick( function() {
+                expect( foo ).to.be( true );
+
+                done();
+            } );
+        } );
     } );
 
 } );
