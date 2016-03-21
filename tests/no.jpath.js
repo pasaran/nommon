@@ -924,6 +924,15 @@ describe( 'types', function() {
     } );
 } );
 
+describe( 'bugs', function() {
+
+    it( 'bug #1', function() {
+        var r = no.jpath( 'foo.bar > 0', {}, { foo: { bar: 42 } } );
+        expect( r ).to.be( true );
+    } );
+
+} );
+
 //  ---------------------------------------------------------------------------------------------------------------  //
 
 describe( 'no.jpath.string', function() {
