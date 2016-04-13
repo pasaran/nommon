@@ -21,8 +21,8 @@ test_string:
 test_watcher:
 	node_modules/.bin/mocha tests/no.watcher.js
 
-jshint:
-	jshint lib/*.js
+lint:
+	node_modules/.bin/eslint lib/*.js
 
-.PHONY: jshint tests test_events test_date test_jpath test_number test_promise test_string test_watcher
+.PHONY: lint tests test_events test_date test_jpath test_number test_promise test_string test_watcher
 
