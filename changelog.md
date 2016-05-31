@@ -1,6 +1,16 @@
 # Changelog
 
-# 0.0.40
+## 0.0.41
+
+  * [no.jpath] Пофикшены внешние функции. Например:
+
+        no.jpath.defunc( 'upper_case', function( x ) {
+            return ( x || '' ).toUpperCase();
+        } );
+
+        var result = no.jpath.string( 'hello-{ upper_case( .hello ) );
+
+## 0.0.40
 
   * [no.jpath] Обнаружен и частично пофикшен баг #30.
 
