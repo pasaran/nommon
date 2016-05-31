@@ -8,7 +8,7 @@
             return ( x || '' ).toUpperCase();
         } );
 
-        var result = no.jpath.string( 'hello-{ upper_case( .hello ) );
+        var result = no.jpath.string( 'hello-{ upper_case( .hello ) } );
 
 ## 0.0.40
 
