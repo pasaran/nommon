@@ -13,7 +13,7 @@
         "url": "git://github.com/pasaran/nommon.git"
     },
     "engines": {
-        "node": "*"
+        "node": "~4.0.0"
     },
     "devDependencies": {
         "expect.js": "*",
