@@ -19,7 +19,7 @@
         "expect.js": "*",
         "mocha": "*",
         "eslint": "2.7.0",
-        "eslint-plugin-nop": "git@github.com:pasaran/eslint-plugin-nop.git"
+        "eslint-plugin-nop": "git://github.com/pasaran/eslint-plugin-nop.git"
     },
     "main": "lib/index.js",
     "files": [
