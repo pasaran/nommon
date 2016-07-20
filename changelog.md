@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.42
+
+  * BREAKING. Для браузера нужно использовать сборку через browserify. Например:
+
+        //  test.js
+        var no = require('nommon/lib/no.jpath.js');
+
+        var foobar = no.jpath( '.foo.bar', { foo: { bar: 42 } } );
+        console.log( foobar );
+
+    Сборка:
+
+        browserify test.js > _test.js
+
 ## 0.0.41
 
   * [no.jpath] Пофикшены внешние функции. Например:
