@@ -620,6 +620,10 @@ describe( 'ternary operator', function() {
         expect( no.jpath( id, data ) ).to.be( 26 );
     } );
 
+    it( 'FOO { .foo ? "FOO-{ .foo }" : "BAR" } BAR', function( id ) {
+        expect( no.jpath.string( id )( { foo: 'QUU' } ) ).to.be( 'FOO FOO-QUU BAR' );
+    } );
+
 } );
 
 //  ---------------------------------------------------------------------------------------------------------------  //
