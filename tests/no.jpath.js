@@ -86,6 +86,22 @@ describe( 'jpath with predicate', function() {
         expect( no.jpath( '.item{ .count > 20 }.id', data ) ).to.eql( [ 'one', 'four', 'five' ] );
     } );
 
+    const data_1 = {
+        result: {
+            b: { id: 1, is_active: 42 },
+            a: { id: 2, is_active: true },
+            c: { id: 3, is_active: null },
+            d: { id: 4, is_active: true },
+            e: { id: 5, is_active: 0 }
+        }
+    };
+    it( '.result.*{ .is_active === true }', function() {
+        expect( no.jpath( '.result.*{ .is_active === true }', data_1 ) ).to.eql( [
+            { id: 2, is_active: true },
+            { id: 4, is_active: true }
+        ] );
+    } );
+
 } );
 
 describe( 'root or self with predicate', function() {
