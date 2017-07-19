@@ -6,7 +6,7 @@
     },
     "name": "nommon",
     "description": "nop's common",
-    "version": "0.0.45",
+    "version": "0.0.46",
     "homepage": "https://github.com/pasaran/nommon",
     "repository": {
         "type": "git",
@@ -22,6 +22,7 @@
         "eslint-plugin-nop": "git://github.com/pasaran/eslint-plugin-nop.git"
     },
     "main": "lib/index.js",
+    "types": "lib/index.d.ts",
     "files": [
         "lib/index.js",
         "lib/no.js",
