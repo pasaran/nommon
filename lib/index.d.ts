@@ -26,7 +26,7 @@ export namespace number {
 
 }
 
-type EventsCallback = ( name: string, ...values: Array<any> ): void;
+type EventsCallback = ( name: string, ...values: Array<any> ) => void;
 
 export class Events {
 
