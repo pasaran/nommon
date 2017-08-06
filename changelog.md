@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.50
+
+  * Правильные .d.ts для date/number/events.
+
 ## 0.0.48 — 0.0.49
 
   * Typings для `no.Events`.
