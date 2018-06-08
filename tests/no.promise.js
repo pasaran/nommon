@@ -1,3 +1,5 @@
+/* eslint-env mocha */
+
 var no = require( '../lib/index.js' );
 
 var expect = require( 'expect.js' );

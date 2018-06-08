@@ -1,4 +1,4 @@
-tests: test_events test_date test_jpath test_jsetter test_number test_promise test_string test_watcher
+test: test_events test_date test_jpath test_jsetter test_number test_promise test_string test_watcher
 
 test_events:
 	node_modules/.bin/mocha tests/no.events.js
@@ -27,5 +27,5 @@ test_watcher:
 lint:
 	node_modules/.bin/eslint lib/*.js
 
-.PHONY: lint tests test_events test_date test_jpath test_jsetter test_number test_promise test_string test_watcher
+.PHONY: lint test test_events test_date test_jpath test_jsetter test_number test_promise test_string test_watcher
 
