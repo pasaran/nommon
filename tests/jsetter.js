@@ -6,18 +6,29 @@ const expect = require( 'expect.js' );
 
 describe( 'jsetter', function() {
 
-    it( '.foo.bar', function() {
+    it( '.a.b', function() {
         const data = {
-            foo: {
-                bar: 42,
+            a: {
+                b: 42,
+            },
+            c: {
+                d: 66,
             },
         };
 
-        const r = jsetter( '.foo.bar' )( data, data, null, 24 );
+        const r = jsetter( '.a.b' )( data, data, null, 24 );
 
-        expect( r ).to.be.eql( { foo: { bar: 24 } } );
+        expect( r ).to.be.eql( {
+            a: {
+                b: 24
+            },
+            c: {
+                d: 66,
+            },
+        } );
         expect( r ).not.to.be( data );
-        expect( r.foo ).not.to.be( data.foo );
+        expect( r.a ).not.to.be( data.a );
+        expect( r.c ).to.be( data.c );
     } );
 
 } );
