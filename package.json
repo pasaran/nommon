@@ -12,9 +12,6 @@
         "type": "git",
         "url": "git://github.com/pasaran/nommon.git"
     },
-    "directories": {
-        "jpath": "./lib/jpath"
-    },
     "engines": {
         "node": "~4.0.0"
     },
