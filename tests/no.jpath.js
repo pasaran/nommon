@@ -136,6 +136,40 @@ describe( 'jpath with index', function() {
         expect( jpath( '.item[ /.index ].id', data ) ).to.eql( 'three' );
     } );
 
+    it( '.[ key ]', function() {
+        const data = {
+            foo: 42,
+            bar: 24,
+        };
+
+        const r = jpath( '.[ key ]', data, { key: 'foo' } );
+        expect( r ).to.be( 42 );
+    } );
+
+    it( '.[ key1 ][ key2 ]', function() {
+        const data = {
+            foo: {
+                bar: 42,
+            },
+        };
+
+        const r = jpath( '.[ key1 ][ key2 ]', data, { key1: 'foo', key2: 'bar' } );
+        expect( r ).to.be( 42 );
+    } );
+
+    it( '.item[ key ]', function() {
+        const data = {
+            item: [
+                { foo: 42 },
+                { foo: 24 },
+                { foo: 66 },
+            ],
+        };
+
+        const r = jpath( '.item[ key ]', data, { key: 'foo' } );
+        expect( r ).to.be.eql( [ 42, 24, 66 ] );
+    } );
+
 } );
 
 //  ---------------------------------------------------------------------------------------------------------------  //
@@ -687,28 +721,42 @@ describe( 'string interpolation', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
-/*
 describe( 'funcs', function() {
 
-    var data = {
-        text: 'Привет'
-    };
+    it( 'enc', function() {
+        const data = {
+            text: 'Привет'
+        };
 
-    jpath.defunc( 'encode', {
-        scheme: 'string',
-        body: function( s ) {
-            return encodeURIComponent( s );
-        }
+        const r = jpath( '"http://yandex.ru/yandsearch?text={ enc( .text ) }"', data );
+        expect( r ).to.be( 'http://yandex.ru/yandsearch?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82' );
     } );
 
-    it( 'encode', function() {
-        expect(
-            jpath( '"http://yandex.ru/yandsearch?text={ encode(.text) }"', data )
-        ).to.eql( 'http://yandex.ru/yandsearch?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82' );
+    it( 'encodeURIComponent', function() {
+        const data = {
+            text: 'Привет'
+        };
+
+        const r = jpath( '"http://yandex.ru/yandsearch?text={ encodeURIComponent( .text ) }"', data );
+        expect( r ).to.be( 'http://yandex.ru/yandsearch?text=%D0%9F%D1%80%D0%B8%D0%B2%D0%B5%D1%82' );
+    } );
+
+    it( 'sum', function() {
+        const data = {
+            a: 42,
+            b: 24,
+        };
+
+        const r = jpath( 'sum( .a, .b, c )', data, {
+            sum: function( a, b, c ) {
+                return a + b + c;
+            },
+            c: 22,
+        } );
+        expect( r ).to.be( 88 );
     } );
 
 } );
-*/
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
@@ -861,51 +909,6 @@ describe( 'nested arrays', function() {
 
 //  ---------------------------------------------------------------------------------------------------------------  //
 
-/*
-describe( 'jpath methods', function() {
-    var scheme = no.type( {
-        foo: {
-            bar: 'string'
-        }
-    } );
-
-    var jpath = jpath.expr( '.foo.bar.substr(7,6)', scheme );
-
-    var data = {
-        foo: {
-            bar: 'Hello, World!'
-        }
-    };
-
-    it( '.foo.bar.substr(7,6)', function() {
-        expect( jpath( data ) ).to.eql( 'World!' );
-    } );
-
-} );
-*/
-
-//  ---------------------------------------------------------------------------------------------------------------  //
-
-/*
-describe( 'jref', function() {
-    var data = {
-        foo: 4,
-        bar: 5
-    };
-
-    jpath.add( 'foo', '.foo' );
-    jpath.add( 'bar', '.bar' );
-
-    var jpath = jpath.expr( '&foo + &bar' );
-
-    it( '&foo + &bar', function() {
-        expect( jpath( data ) ).to.eql( 9 );
-    } );
-} );
-*/
-
-//  ---------------------------------------------------------------------------------------------------------------  //
-
 describe( 'jresults', function() {
 
     it( 'simple object', function() {
@@ -921,35 +924,6 @@ describe( 'jresults', function() {
 } );
 
 //  ---------------------------------------------------------------------------------------------------------------  //
-
-/*
-describe( 'types', function() {
-    var type = no.type( {
-        id: String,
-        items: [
-            {
-                id: String,
-                count: Number
-            }
-        ]
-    } );
-
-    var data = {
-        id: 'foo',
-        items: [
-            { id: 'one', count: 42 },
-            { id: 'two', count: 24 },
-            { id: 'three', count: 66 }
-        ]
-    };
-
-    it( '.items.count', function( jpath ) {
-        var jexpr = jpath.expr( jpath, type );
-
-        expect( jexpr( data ) ).to.be.eql( [ 42, 24, 66 ] );
-    } );
-} );
-*/
 
 describe( 'bugs', function() {
 
