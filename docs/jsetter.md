@@ -139,7 +139,7 @@ no.jsetter.delete( '.item[ index ]' )( data, { index: 1 } )
 
 //  Удалить все item'ы с count > 3.
 no.jsetter.delete( '.item{ .count > 3 }' )( data )
-``
+```
 
 
 ## `no.jsetter.push`, `no.jsetter.pop`, ...
