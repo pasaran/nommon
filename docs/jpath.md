@@ -2,7 +2,7 @@
 
 `jpath` — аналог XPath выражений для JS объектов:
 
-    no = require( 'nommon' )
+    no = require( 'nommon' )
 
     data = {
         foo: {
