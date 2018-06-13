@@ -674,6 +674,30 @@ describe( 'jsetter.push', function() {
 
 } );
 
+describe( 'jsetter.slice', function() {
+
+    it( '.item', function() {
+        const data = {
+            item: [
+                { id: '1' },
+                { id: '2' },
+                { id: '3' },
+            ],
+        };
+
+        const r = no.jsetter.splice( '.item' )( data, null, 1, 1, { id: '4' }, { id: '5' } );
+        expect( r ).to.be.eql( {
+            item: [
+                { id: '1' },
+                { id: '4' },
+                { id: '5' },
+                { id: '3' },
+            ],
+        } );
+    } );
+
+} );
+
 describe( 'jsetter.sort', function() {
 
     it( '.item', function() {
