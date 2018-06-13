@@ -140,6 +140,7 @@
   * `no.jsetter.splice`
   * `no.jsetter.sort`
 
+Примеры:
 
     data = {
         item: [
