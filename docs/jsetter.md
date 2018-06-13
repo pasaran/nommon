@@ -105,9 +105,9 @@ no.jsetter( '.item[ length( . ) - 1 ].selected' )( data, null, value => !value )
 
 //  Явно заменить один item на другой.
 no.jsetter( '.item[ 0 ]' )( data, null, { id: '1', selected: true } )
+```
 
 ## `no.jsetter.delete`
-```
 
 Помимо изменений элементов массива и свойств объекта, бывают нужны и другие операции.
 Например, удаление чего-либо (из массива или объекта).
