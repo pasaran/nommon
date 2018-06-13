@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 
-const jsetter = require( '../lib/jsetter' );
+const no = require( '../lib/no.jsetter' );
 
 const expect = require( 'expect.js' );
 
@@ -16,7 +16,7 @@ describe( 'jsetter', function() {
             },
         };
 
-        const r = jsetter( '.a.b' )( data, null, 24 );
+        const r = no.jsetter( '.a.b' )( data, null, 24 );
 
         expect( r ).to.be.eql( {
             a: {
@@ -34,7 +34,7 @@ describe( 'jsetter', function() {
     it( '.a.b #2', function() {
         const data = {};
 
-        const r = jsetter( '.a.b' )( data, null, 42 );
+        const r = no.jsetter( '.a.b' )( data, null, 42 );
 
         expect( r ).to.be( data );
         expect( r ).to.be.eql( {} );
@@ -47,7 +47,7 @@ describe( 'jsetter', function() {
             },
         };
 
-        const r = jsetter( '.a.b' )( data, null, 42 );
+        const r = no.jsetter( '.a.b' )( data, null, 42 );
         expect( r ).to.be.eql( {
             a: {
                 b: 42,
@@ -64,7 +64,7 @@ describe( 'jsetter', function() {
             },
         };
 
-        const r = jsetter( '.foo.bar' )( data, null, value => !value );
+        const r = no.jsetter( '.foo.bar' )( data, null, value => !value );
         expect( r ).to.be.eql( {
             foo: {
                 bar: true,
@@ -81,7 +81,7 @@ describe( 'jsetter', function() {
             },
         };
 
-        const r = jsetter( '.foo.bar' )( data, null, () => 42 );
+        const r = no.jsetter( '.foo.bar' )( data, null, () => 42 );
         expect( r ).to.be.eql( {
             foo: {
                 bar: 42,
@@ -100,7 +100,7 @@ describe( 'jsetter', function() {
             ],
         };
 
-        const r = jsetter( '.item{ .count > 0 }.count' )( data, null, count => count - 1 );
+        const r = no.jsetter( '.item{ .count > 0 }.count' )( data, null, count => count - 1 );
         expect( r ).to.be.eql( {
             item: [
                 { count: 3 },
@@ -125,7 +125,7 @@ describe( 'jsetter', function() {
         };
 
         const new_item = { id: '4', count: 0 };
-        const r = jsetter( '.item{ .id === id }' )( data, { id: '2' }, new_item );
+        const r = no.jsetter( '.item{ .id === id }' )( data, { id: '2' }, new_item );
         expect( r ).to.be.eql( {
             item: [
                 { id: '1', count: 3 },
@@ -144,7 +144,7 @@ describe( 'jsetter', function() {
             ],
         };
 
-        const r = jsetter( '.item{ .count === 3 }' )( data, null, function( item ) {
+        const r = no.jsetter( '.item{ .count === 3 }' )( data, null, function( item ) {
             //  Вообще, так делать не нужно, но как это запретить -- непонятно.
             item.count = 42;
             return item;
@@ -165,7 +165,7 @@ describe( 'jsetter', function() {
             ],
         };
 
-        const r = jsetter( '.item{ .count === 3 }' )( data, null, function( item ) {
+        const r = no.jsetter( '.item{ .count === 3 }' )( data, null, function( item ) {
             return Object.assign( {}, item, { count: 42 } );
         } );
         expect( r ).to.be.eql( {
@@ -195,7 +195,7 @@ describe( 'jsetter', function() {
         const new_a = {
             e: 66,
         };
-        const r = jsetter( '.a{ .b === 42 }' )( data, null, new_a );
+        const r = no.jsetter( '.a{ .b === 42 }' )( data, null, new_a );
         expect( r ).to.be.eql( {
             a: {
                 e: 66,
@@ -241,7 +241,7 @@ describe( 'jsetter', function() {
             ],
         };
 
-        const r = jsetter( '.chat_list{ .chat_id === chat_id }.messages{ .message_id === message_id }.status' )( data, {
+        const r = no.jsetter( '.chat_list{ .chat_id === chat_id }.messages{ .message_id === message_id }.status' )( data, {
             chat_id: '1',
             message_id: '2',
         }, true );
@@ -277,7 +277,7 @@ describe( 'jsetter', function() {
             ],
         };
 
-        const r = jsetter( '.item[ 1 ].status' )( data, null, true );
+        const r = no.jsetter( '.item[ 1 ].status' )( data, null, true );
 
         expect( r ).to.be.eql( {
             item: [
@@ -302,7 +302,7 @@ describe( 'jsetter', function() {
             ],
         };
 
-        const r = jsetter( '.item[ index ].status' )( data, { index: 1 }, true );
+        const r = no.jsetter( '.item[ index ].status' )( data, { index: 1 }, true );
 
         expect( r ).to.be.eql( {
             item: [
@@ -327,7 +327,7 @@ describe( 'jsetter', function() {
             ],
         };
 
-        const r = jsetter( '.item[ index ]' )( data, { index: 1 }, item => item );
+        const r = no.jsetter( '.item[ index ]' )( data, { index: 1 }, item => item );
         expect( r ).to.be.eql( {
             item: [
                 { id: '1' },
@@ -351,7 +351,7 @@ describe( 'jsetter', function() {
             ],
         };
 
-        const r = jsetter( '.item[ index ]' )( data, { index: 1 }, function( item ) {
+        const r = no.jsetter( '.item[ index ]' )( data, { index: 1 }, function( item ) {
             //  Как такое запретить -- непонятно.
             item.id = '4';
             return item;
@@ -372,7 +372,7 @@ describe( 'jsetter', function() {
             ],
         };
 
-        const r = jsetter( '.item[ index ]' )( data, { index: 1 }, function( item ) {
+        const r = no.jsetter( '.item[ index ]' )( data, { index: 1 }, function( item ) {
             return Object.assign( {}, item, {
                 count: 42,
             } );
@@ -403,7 +403,7 @@ describe( 'jsetter.delete', function() {
             },
         };
 
-        const r = jsetter.delete( '.foo' )( data );
+        const r = no.jsetter.delete( '.foo' )( data );
 
         expect( r ).to.be.eql( {
             bar: {
@@ -422,7 +422,7 @@ describe( 'jsetter.delete', function() {
             },
         };
 
-        const r = jsetter.delete( '.bar.quu' )( data );
+        const r = no.jsetter.delete( '.bar.quu' )( data );
 
         expect( r ).to.be.eql( {
             foo: 42,
@@ -443,7 +443,7 @@ describe( 'jsetter.delete', function() {
 
         };
 
-        const r = jsetter.delete( '.a{ .b === 42 }' )( data );
+        const r = no.jsetter.delete( '.a{ .b === 42 }' )( data );
         expect( r ).to.be.eql( {
             c: {
                 d: 24,
@@ -464,7 +464,7 @@ describe( 'jsetter.delete', function() {
             ],
         };
 
-        const r = jsetter.delete( '.item{ .count > 2 }' )( data );
+        const r = no.jsetter.delete( '.item{ .count > 2 }' )( data );
 
         expect( r ).to.be.eql( {
             item: [
@@ -487,7 +487,7 @@ describe( 'jsetter.delete', function() {
             ],
         };
 
-        const r = jsetter.delete( '.item[ 1 ]' )( data );
+        const r = no.jsetter.delete( '.item[ 1 ]' )( data );
 
         expect( r ).to.be.eql( {
             item: [
@@ -510,7 +510,7 @@ describe( 'jsetter.delete', function() {
             ],
         };
 
-        const r = jsetter.delete( '.item[ index ]' )( data, { index: 1 } );
+        const r = no.jsetter.delete( '.item[ index ]' )( data, { index: 1 } );
 
         expect( r ).to.be.eql( {
             item: [
@@ -535,7 +535,7 @@ describe( 'jsetter.delete', function() {
             ],
         };
 
-        const r = jsetter.delete( '.item{ .id === id }' )( data, { id: '4' } );
+        const r = no.jsetter.delete( '.item{ .id === id }' )( data, { id: '4' } );
 
         expect( r ).to.be.eql( {
             item: [
@@ -563,7 +563,7 @@ describe( 'jsetter.delete', function() {
             ],
         };
 
-        const r = jsetter.delete( '.item{ .count > 2 }.foo' )( data );
+        const r = no.jsetter.delete( '.item{ .count > 2 }.foo' )( data );
 
         expect( r ).to.be.eql( {
             item: [
@@ -597,7 +597,7 @@ describe( 'jsetter.push', function() {
         const new_item = {
             id: 3
         };
-        const r = jsetter.push( '.item' )( data, null, new_item );
+        const r = no.jsetter.push( '.item' )( data, null, new_item );
 
         expect( r ).to.be.eql( {
             item: [
@@ -639,7 +639,7 @@ describe( 'jsetter.push', function() {
         const new_message = {
             message_id: '2',
         };
-        const r = jsetter.push( '.chat_list{ .chat_id === chat_id }.messages' )( data, { chat_id: '2' }, new_message );
+        const r = no.jsetter.push( '.chat_list{ .chat_id === chat_id }.messages' )( data, { chat_id: '2' }, new_message );
 
         expect( r ).to.be.eql( {
             chat_list: [
@@ -687,7 +687,7 @@ describe( 'jsetter.sort', function() {
             ],
         };
 
-        const r = jsetter.sort( '.item' )( data, null, function( a, b ) {
+        const r = no.jsetter.sort( '.item' )( data, null, function( a, b ) {
             return a.count - b.count;
         } );
         expect( r ).to.be.eql( {

@@ -10,7 +10,7 @@ test_jpath:
 	node_modules/.bin/mocha tests/no.jpath.js
 
 test_jsetter:
-	node_modules/.bin/mocha tests/jsetter.js
+	node_modules/.bin/mocha tests/no.jsetter.js
 
 test_number:
 	node_modules/.bin/mocha tests/no.number.js

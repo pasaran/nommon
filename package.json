@@ -12,14 +12,22 @@
         "type": "git",
         "url": "git://github.com/pasaran/nommon.git"
     },
+    "scripts": {
+        "clean": "rm -rf dist",
+        "build": "npm run clean ; ./node_modules/.bin/webpack",
+        "prepublishOnly": "npm run build",
+        "test": "make test"
+    },
     "engines": {
         "node": "~4.0.0"
     },
     "devDependencies": {
+        "eslint": "2.7.0",
+        "eslint-plugin-nop": "git://github.com/pasaran/eslint-plugin-nop.git",
         "expect.js": "*",
         "mocha": "*",
-        "eslint": "2.7.0",
-        "eslint-plugin-nop": "git://github.com/pasaran/eslint-plugin-nop.git"
+        "webpack": "^4.12.0",
+        "webpack-cli": "^3.0.4"
     },
     "main": "lib/index.js",
     "types": "lib/index.d.ts",
@@ -27,10 +35,7 @@
         "lib/index.js",
         "lib/*.d.ts",
         "lib/no.js",
-        "lib/no.*.js"
-    ],
-    "scripts": {
-        "test": "make tests"
-    }
+        "lib/no.*.js",
+        "dist/*"
+    ]
 }
-
