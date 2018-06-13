@@ -249,7 +249,7 @@ no.jpath( '.item{ .count === max_count }.id', data, {
 Внутри предикатов можно использовать более-менее обычные js-операторы и значения:
 
 ```js
-no.jpath( '.item{ .id === "2" }'.id', data )
+no.jpath( '.item{ .id === "2" }.id', data )
 //  [ '2' ]
 
 no.jpath( '.item{ .count > 4 && .selected }.id', data )
