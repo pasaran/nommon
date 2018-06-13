@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.52
+
+  * Почищен `no.jpath`. Удалены все заделы для teya, которые так и не пригодились (типы в частности).
+    Доки для [jpath](./docs/jpath.md).
+
+  * Добавлен [jsetter](./docs/jsetter.md).
+
 ## 0.0.50 — 0.0.51
 
   * Правильные .d.ts для date/number/events.
