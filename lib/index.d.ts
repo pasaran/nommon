@@ -3,7 +3,10 @@ type CompiledJPath = ( data: any, vars?: any ) => any;
 type CompiledJString = ( data: any, vars?: any ) => string;
 type EventsCallback = ( name: string, ...values: Array<any> ) => void;
 
+type CompiledJSetter = <T>( data: T, vars : object | null, value: any ) => T;
+
 export function jpath( jpath: string, data: any, vars?: any ): any;
+export function jsetter( jpath: string ): CompiledJSetter;
 
 export namespace jpath {
     export function expr( jexpr: string ): CompiledJPath;
