@@ -734,3 +734,26 @@ describe( 'jsetter.sort', function() {
 
 } );
 
+describe( 'jsetter with dynamic key', function() {
+
+    it( '.foo[ key ]', function() {
+        const data = {
+            foo: {
+                a: 42,
+                b: 24,
+                c: 66,
+            },
+        };
+
+        const r = no.jsetter( '.foo[ key ]' )( data, { key: 'b' }, 37 );
+        expect( r ).to.be.eql( {
+            foo: {
+                a: 42,
+                b: 37,
+                c: 66,
+            },
+        } );
+    } );
+
+} );
+
