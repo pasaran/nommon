@@ -1,10 +1,11 @@
 # Changelog
 
-## 0.0.54
+## 0.0.54 — 0.0.55
 
   * [no.jsetter] Поддержка динамических ключей в объектах. Например:
 
         no.jsetter( '.foo[ key ]' )( data, { key: 'bar' }, value )
+        no.jsetter( '.foo[ key ].quu' )( data, { key: 'bar' }, value )
 
 ## 0.0.53
 
