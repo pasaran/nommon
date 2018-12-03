@@ -755,5 +755,47 @@ describe( 'jsetter with dynamic key', function() {
         } );
     } );
 
+    it( '.foo[ key ].x', function() {
+        const data = {
+            foo: {
+                a: {
+                    x: 1,
+                    y: 2,
+                },
+            },
+        };
+
+        const r = no.jsetter( '.foo[ key ].x' )( data, { key: 'a' }, 3 );
+        expect( r ).to.be.eql( {
+            foo: {
+                a: {
+                    x: 3,
+                    y: 2,
+                }
+            },
+        } );
+    } );
+
+    it( '.foo[ key1 ][ key2 ]', function() {
+        const data = {
+            foo: {
+                a: {
+                    x: 1,
+                    y: 2,
+                },
+            },
+        };
+
+        const r = no.jsetter( '.foo[ key1 ][ key2 ]' )( data, { key1: 'a', key2: 'x' }, 3 );
+        expect( r ).to.be.eql( {
+            foo: {
+                a: {
+                    x: 3,
+                    y: 2,
+                }
+            },
+        } );
+    } );
+
 } );
 
