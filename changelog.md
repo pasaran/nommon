@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.54
+
+  * [no.jsetter] Поддержка динамических ключей в объектах. Например:
+
+        no.jsetter( '.foo[ key ]' )( data, { key: 'bar' }, value )
+
 ## 0.0.53
 
   * [no.date] Поддержка %e в no.date #32
