@@ -6,7 +6,7 @@
     },
     "name": "nommon",
     "description": "nop's common",
-    "version": "0.0.55",
+    "version": "0.0.56",
     "homepage": "https://github.com/pasaran/nommon",
     "repository": {
         "type": "git",
@@ -17,9 +17,6 @@
         "build": "npm run clean ; ./node_modules/.bin/webpack",
         "prepublishOnly": "npm run build",
         "test": "make test"
-    },
-    "engines": {
-        "node": "~4.0.0"
     },
     "devDependencies": {
         "eslint": "2.7.0",
