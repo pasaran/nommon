@@ -13,10 +13,19 @@ export namespace jpath {
     export function string( jstring: string ): CompiledJString;
 }
 
+export namespace jsetter {
+    export function delete( jpath: string ): CompiledJSetter;
+    export function push( jpath: string ): CompiledJSetter;
+    export function pop( jpath: string ): CompiledJSetter;
+    export function shift( jpath: string ): CompiledJSetter;
+    export function unshift( jpath: string ): CompiledJSetter;
+    export function splice( jpath: string ): CompiledJSetter;
+    export function sort( jpath: string ): CompiledJSetter;
+}
+
 export namespace date {
     export function format( format: string, date: Date, locale?: string ): string;
     export function formatter( format: string, locale?: string ): CompiledFormat;
-
 }
 
 export namespace number {
