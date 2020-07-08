@@ -14,7 +14,8 @@ export namespace jpath {
 }
 
 export namespace jsetter {
-    export function delete( jpath: string ): CompiledJSetter;
+    function del( jpath: string ): CompiledJSetter;
+    export { del as delete };
     export function push( jpath: string ): CompiledJSetter;
     export function pop( jpath: string ): CompiledJSetter;
     export function shift( jpath: string ): CompiledJSetter;
